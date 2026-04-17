@@ -1,0 +1,8 @@
+{
+  "confirmations": {
+    "delete_title": "¿Eliminar registro?",
+    "delete_text": "¿Estás seguro de que deseas eliminar {{ item }}?",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar"
+  }
+}

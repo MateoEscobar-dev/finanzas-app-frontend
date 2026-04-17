@@ -1,0 +1,23 @@
+{
+  "actions": {
+    "actions": "Acciones",
+    "create": "Crear",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "view": "Ver",
+    "history": "Historial",
+    "activate": "Activar",
+    "deactivate": "Desactivar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "confirm_delete": "¿Estás seguro de que deseas eliminar este registro?",
+    "delete_success": "Registro eliminado correctamente",
+    "delete_error": "Error al eliminar el registro",
+    "no_data": "No hay datos para mostrar",
+    "per_page": "Por página",
+    "showing": "Mostrando",
+    "of": "de",
+    "entries": "registros"
+  }
+}

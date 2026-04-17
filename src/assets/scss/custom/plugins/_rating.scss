@@ -1,0 +1,42 @@
+//
+// rating.scss
+//
+// Rating
+.stars {
+  font-size: 30px;
+  color: $yellow;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 30px;
+  color: $yellow;
+}
+
+.star_fill {
+  color: $gray-500;
+}
+
+.full {
+  color: #b0c4de;
+}
+
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: $yellow;
+}
+
+.filled {
+  color: #1e90ff;
+}
+
+.bad {
+  color: #deb0b0;
+}
+
+.filled.bad {
+  color: #ff1e1e;
+}

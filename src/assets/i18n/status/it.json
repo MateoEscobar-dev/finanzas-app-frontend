@@ -1,0 +1,19 @@
+{
+  "status": {
+    "active": "Attivo",
+    "inactive": "Inattivo",
+    "pending": "In sospeso",
+    "completed": "Completato",
+    "cancelled": "Annullato",
+    "archived": "Archiviato",
+    "draft": "Bozza",
+    "published": "Pubblicato",
+    "yes": "Sì",
+    "not": "No"
+  },
+  "service_status": {
+    "active": "In esecuzione",
+    "inactive": "Inattivo",
+    "paused": "In pausa"
+  }
+}

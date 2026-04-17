@@ -1,0 +1,10 @@
+{
+  "messages": {
+    "success": "Éxito",
+    "created_success": "Registro creado correctamente",
+    "updated_success": "Registro actualizado correctamente",
+    "deleted_success": "Registro eliminado correctamente",
+    "warning": "Advertencia",
+    "info": "Información"
+  }
+}

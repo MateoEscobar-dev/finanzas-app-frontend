@@ -1,0 +1,18 @@
+{
+  "labels": {
+    "password": "Contraseña",
+    "confirm_password": "Confirmar Contraseña",
+    "username": "Usuario",
+    "full_name": "Nombre Completo",
+    "role": "Rol",
+    "email_address": "Dirección de Correo",
+    "phone_number": "Número de Teléfono",
+    "address": "Dirección",
+    "city": "Ciudad",
+    "country": "País",
+    "postal_code": "Código Postal",
+    "description": "Descripción",
+    "notes": "Notas",
+    "select": "Selecciona una opción"
+  }
+}

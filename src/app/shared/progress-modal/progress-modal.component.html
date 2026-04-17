@@ -1,0 +1,105 @@
+<div
+  class="modal fade"
+  [ngClass]="{ show: isVisible }"
+  [style.display]="isVisible ? 'block' : 'none'"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content border-0 shadow-lg">
+      <!-- Header -->
+      <div class="modal-header bg-gradient-modern border-0 py-3">
+        <h5 class="modal-title fw-bold fs-5 text-white">
+          <i class="mdi mdi-cog-outline me-2"></i>{{ title }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          (click)="closeModal()"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body p-4">
+        <!-- Barra de progreso -->
+        <div class="progress mb-4" style="height: 8px">
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            [ngClass]="{
+              'bg-success': isCompleted,
+              'bg-danger': hasError,
+              'bg-primary': !isCompleted && !hasError,
+            }"
+            role="progressbar"
+            [style.width.%]="progress"
+            [attr.aria-valuenow]="progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+
+        <!-- Estado -->
+        <div class="text-center mb-3">
+          <span
+            class="badge fs-6 px-3 py-2"
+            [ngClass]="{
+              'bg-success': isCompleted,
+              'bg-danger': hasError,
+              'bg-primary': !isCompleted && !hasError,
+            }"
+          >
+            <i
+              [ngClass]="{
+                'mdi-check-circle': isCompleted,
+                'mdi-alert-circle': hasError,
+                'mdi-cog': !isCompleted && !hasError,
+              }"
+              class="me-1"
+            ></i>
+            {{
+              isCompleted ? 'Completado' : hasError ? 'Error' : 'Procesando...'
+            }}
+          </span>
+        </div>
+
+        <!-- Logs -->
+        <div
+          class="progress-logs border rounded p-3 bg-light"
+          style="height: 300px; overflow-y: auto"
+        >
+          <div *ngFor="let log of logs" class="log-entry mb-2">
+            <small class="text-muted me-2">{{
+              log.timestamp | date: 'HH:mm:ss'
+            }}</small>
+            <i [ngClass]="getLogIcon(log.type)" class="me-2"></i>
+            <span [ngClass]="getLogClass(log.type)">{{ log.message }}</span>
+          </div>
+          <div *ngIf="logs.length === 0" class="text-center text-muted py-4">
+            <i class="mdi mdi-console-line display-4"></i>
+            <p class="mt-2">Esperando logs...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="cancelOperation()"
+          [disabled]="isCompleted"
+        >
+          <i class="mdi mdi-close me-1"></i>Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="closeModal()">
+          <i class="mdi mdi-check me-1"></i>Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Backdrop -->
+@if (isVisible) {
+  <div class="modal-backdrop fade show" (click)="closeModal()"></div>
+}

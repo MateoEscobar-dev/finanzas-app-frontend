@@ -1,0 +1,19 @@
+{
+  "status": {
+    "active": "Активный",
+    "inactive": "Неактивный",
+    "pending": "В ожидании",
+    "completed": "Завершено",
+    "cancelled": "Отменено",
+    "archived": "Архивировано",
+    "draft": "Черновик",
+    "published": "Опубликовано",
+    "yes": "Да",
+    "not": "Нет"
+  },
+  "service_status": {
+    "active": "Работает",
+    "inactive": "Неактивен",
+    "paused": "Приостановлен"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "errors": {
+    "error": "Errore",
+    "load": "Errore nel caricamento dei dati",
+    "load_record": "Impossibile caricare il record",
+    "create": "Errore nella creazione del record",
+    "update": "Errore nell'aggiornamento del record",
+    "delete": "Errore nell'eliminazione del record",
+    "validation": "Errore di convalida",
+    "unauthorized": "Non autorizzato",
+    "forbidden": "Vietato",
+    "not_found": "Non trovato",
+    "server_error": "Errore del server",
+    "network_error": "Errore di rete"
+  }
+}

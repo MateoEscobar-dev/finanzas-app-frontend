@@ -1,0 +1,19 @@
+{
+  "status": {
+    "active": "Ενεργό",
+    "inactive": "Απενεργοποιημένο",
+    "pending": "Σε εκκρεμότητα",
+    "completed": "Ολοκληρωμένη",
+    "cancelled": "Ακυρώθηκε",
+    "archived": "Αρχειοθετημένη",
+    "draft": "Προσχέδιο",
+    "published": "Δημοσιευμένη",
+    "yes": "Ναι",
+    "not": "Όχι"
+  },
+  "service_status": {
+    "active": "Σε λειτουργία",
+    "inactive": "Ανενεργό",
+    "paused": "Σε παύση"
+  }
+}

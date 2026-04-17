@@ -1,0 +1,136 @@
+@if (searchable) {
+  <div class="d-lg-flex align-items-center text-center pb-1 mb-1">
+    <div class="d-inline-block me-3">
+      <label class="me-1">Display</label>
+      <select
+        [(ngModel)]="pageSize"
+        (change)="PageChange()"
+        class="form-select form-select-sm ms-1 me-1 d-inline-block w-auto"
+      >
+        <option [ngValue]="5">5</option>
+        <option [ngValue]="10">10</option>
+        <option [ngValue]="20">20</option>
+        <option [ngValue]="-1">All</option>
+      </select>
+      products
+    </div>
+
+    <div class="d-inline-flex ms-auto align-item-center">
+      <label class="me-1 align-self-center">Search :</label>
+      <input
+        type="search"
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="searchTerm()"
+        class="form-control d-inline-block w-auto"
+        placeholder=""
+        aria-controls="products-datatable"
+      />
+    </div>
+  </div>
+}
+
+<div class="table-responsive">
+  <table class="table table-centered" [ngClass]="tableClass">
+    <thead [ngClass]="theadClass">
+      <tr>
+        @if (isSelectable) {
+          <th class="all" style="width: 20px">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="customCheck1"
+                [(ngModel)]="masterSelected"
+                (change)="checkUncheckAll($event)"
+              />
+              <label class="form-check-label" for="checkAll">&nbsp;</label>
+            </div>
+          </th>
+        }
+        @for (column of tableInstance.columns; track $index) {
+          <th (click)="handleSort(column.accessor)" style="cursor: pointer">
+            {{ column.header }}
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of filteredData; track $index) {
+        <tr>
+          <td *ngIf="isSelectable">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="customCheck2"
+                [(ngModel)]="item.states"
+              />
+              <label class="form-check-label" for="customCheck2">&nbsp;</label>
+            </div>
+          </td>
+          @for (column of columns; track $index) {
+            <td>
+              @if (column.Cell) {
+                <div
+                  [innerHTML]="sanitizeHtml(column.Cell({ row: item }))"
+                ></div>
+              } @else if (column.type == 'chart') {
+                <apx-chart
+                  [chart]="item.chart.chart!"
+                  [series]="item.chart.series!"
+                  [stroke]="item.chart.stroke!"
+                  [markers]="item.chart.markers!"
+                  [colors]="item.chart.colors!"
+                  [tooltip]="item.chart.tooltip!"
+                  class="d-block apex-table-chart"
+                ></apx-chart>
+              } @else {
+                {{ item[column.accessor] }}
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (pagination) {
+    <div class="d-lg-flex align-items-center text-center pb-1">
+      <div class="d-inline-block me-3 mb-0">
+        <p class="text-gray-600 dark:text-gray-100">
+          Showing {{ startIndex + 1 }} to {{ endIndex }} of
+          {{ tableInstance.data.length }} entries
+        </p>
+      </div>
+
+      <ul class="pagination pagination-rounded d-inline-flex ms-auto mb-0">
+        <li
+          (click)="changePage(activePage - 1)"
+          class="page-item paginate_button previous"
+        >
+          <a href="javascript:void(0);" class="page-link"
+            ><i class="mdi mdi-chevron-left"></i
+          ></a>
+        </li>
+        @for (page of generatePageNumbers(totalPages); track $index) {
+          <li class="page-item" [ngClass]="{ active: activePage === page }">
+            <a
+              href="javascript:void(0);"
+              class="page-link"
+              (click)="changePage(page)"
+              >{{ page }}</a
+            >
+          </li>
+        }
+        <li
+          (click)="changePage(activePage + 1)"
+          class="page-item paginate_button next"
+        >
+          <a href="javascript:void(0);" class="page-link"
+            ><i class="mdi mdi-chevron-right"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+  }
+</div>

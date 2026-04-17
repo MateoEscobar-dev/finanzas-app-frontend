@@ -1,0 +1,23 @@
+{
+  "actions": {
+    "actions": "Azioni",
+    "create": "Creare",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "view": "Visualizza",
+    "history": "Cronologia",
+    "activate": "Attivare",
+    "deactivate": "Disattivare",
+    "confirm": "Confermare",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "confirm_delete": "Sei sicuro di voler eliminare questo record?",
+    "delete_success": "Record eliminato con successo",
+    "delete_error": "Errore durante l'eliminazione del record",
+    "no_data": "Nessun dato da visualizzare",
+    "per_page": "Per pagina",
+    "showing": "Mostrando",
+    "of": "di",
+    "entries": "voci"
+  }
+}

@@ -1,0 +1,215 @@
+<div
+  class="modal fade"
+  [ngClass]="{ show: isVisible }"
+  [style.display]="isVisible ? 'block' : 'none'"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border-0 shadow-lg">
+      <!-- Header -->
+      <div class="modal-header bg-gradient border-0 py-2">
+        <h5 class="modal-title fw-bold fs-5 text-dark">
+          @if (mode === 'create') {
+            <i class="mdi mdi-plus-circle me-2"></i
+            >{{ 'actions.create' | translate }}
+          }
+          @if (mode === 'edit') {
+            <i class="mdi mdi-pencil-circle me-2"></i
+            >{{ 'actions.edit' | translate }}
+          }
+          @if (mode === 'view') {
+            <i class="mdi mdi-eye-circle me-2"></i
+            >{{ 'actions.view' | translate }}
+          }
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+          [disabled]="isSubmitting"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <!-- Body -->
+      <form [formGroup]="form" class="modal-body pr-4 pl-4">
+        <div class="row g-1">
+          @for (field of fields; track field.name) {
+            @if (!field.hidden) {
+              <div [ngClass]="field.colSize || 'col-12'" class="form-group">
+                <!-- Text Input -->
+                @if (
+                  field.type === 'text' ||
+                  field.type === 'email' ||
+                  field.type === 'password' ||
+                  field.type === 'number'
+                ) {
+                  <label [for]="field.name" class="form-label fw-semibold">
+                    {{ field.label | translate }}
+                    @if (field.required) {
+                      <span class="badge bg-danger ms-1">*</span>
+                    }
+                  </label>
+                  <input
+                    [type]="field.type"
+                    class="form-control form-control-lg"
+                    [id]="field.name"
+                    [formControlName]="field.name"
+                    [placeholder]="field.placeholder || ''"
+                    [readonly]="mode === 'view' || !!field.disabled"
+                    [disabled]="!!field.disabled"
+                    [class.is-invalid]="isFieldInvalid(field.name)"
+                  />
+                  @if (isFieldInvalid(field.name)) {
+                    <div class="invalid-feedback d-block small mt-1">
+                      <i class="mdi mdi-alert-circle me-1"></i
+                      >{{ getFieldError(field.name) }}
+                    </div>
+                  }
+                }
+
+                <!-- Textarea -->
+                @if (field.type === 'textarea') {
+                  <label [for]="field.name" class="form-label fw-semibold">
+                    {{ field.label | translate }}
+                    @if (field.required) {
+                      <span class="badge bg-danger ms-1">*</span>
+                    }
+                  </label>
+                  <textarea
+                    class="form-control form-control-lg"
+                    [id]="field.name"
+                    [formControlName]="field.name"
+                    [placeholder]="field.placeholder || ''"
+                    [readonly]="mode === 'view' || !!field.disabled"
+                    [disabled]="!!field.disabled"
+                    rows="4"
+                    [class.is-invalid]="isFieldInvalid(field.name)"
+                  ></textarea>
+                  @if (isFieldInvalid(field.name)) {
+                    <div class="invalid-feedback d-block small mt-1">
+                      <i class="mdi mdi-alert-circle me-1"></i
+                      >{{ getFieldError(field.name) }}
+                    </div>
+                  }
+                }
+
+                <!-- Checkbox -->
+                @if (field.type === 'checkbox') {
+                  <div class="form-check form-switch pt-2">
+                    <input
+                      type="checkbox"
+                      class="form-check-input form-check-input-lg"
+                      [id]="field.name"
+                      [formControlName]="field.name"
+                      [disabled]="mode === 'view'"
+                    />
+                    <label
+                      class="form-check-label fw-semibold ms-2"
+                      [for]="field.name"
+                    >
+                      {{ field.label | translate }}
+                      @if (field.required) {
+                        <span class="badge bg-danger ms-1">*</span>
+                      }
+                    </label>
+                  </div>
+                }
+
+                <!-- Select -->
+                @if (field.type === 'select' && field.options) {
+                  <label [for]="field.name" class="form-label fw-semibold">
+                    {{ field.label | translate }}
+                    @if (field.required) {
+                      <span class="badge bg-danger ms-1">*</span>
+                    }
+                  </label>
+                  <select
+                    class="form-select form-select-lg"
+                    [id]="field.name"
+                    [formControlName]="field.name"
+                    [disabled]="mode === 'view'"
+                    [class.is-invalid]="isFieldInvalid(field.name)"
+                  >
+                    <option value="">{{ 'labels.select' | translate }}</option>
+                    @for (opt of field.options; track opt.value) {
+                      <option [value]="opt.value">{{ opt.label }}</option>
+                    }
+                  </select>
+                  @if (isFieldInvalid(field.name)) {
+                    <div class="invalid-feedback d-block small mt-1">
+                      <i class="mdi mdi-alert-circle me-1"></i
+                      >{{ getFieldError(field.name) }}
+                    </div>
+                  }
+                }
+
+                <!-- Date -->
+                @if (field.type === 'date') {
+                  <label [for]="field.name" class="form-label fw-semibold">
+                    {{ field.label | translate }}
+                    @if (field.required) {
+                      <span class="badge bg-danger ms-1">*</span>
+                    }
+                  </label>
+                  <input
+                    type="date"
+                    class="form-control form-control-lg"
+                    [id]="field.name"
+                    [formControlName]="field.name"
+                    [readonly]="mode === 'view'"
+                    [class.is-invalid]="isFieldInvalid(field.name)"
+                  />
+                  @if (isFieldInvalid(field.name)) {
+                    <div class="invalid-feedback d-block small mt-1">
+                      <i class="mdi mdi-alert-circle me-1"></i
+                      >{{ getFieldError(field.name) }}
+                    </div>
+                  }
+                }
+              </div>
+            }
+          }
+        </div>
+      </form>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary btn-lg px-4"
+          (click)="closeModal()"
+          [disabled]="isSubmitting"
+        >
+          <i class="mdi mdi-close me-2"></i>{{ 'actions.cancel' | translate }}
+        </button>
+        @if (mode !== 'view') {
+          <button
+            type="button"
+            class="btn btn-primary btn-lg px-4"
+            (click)="submit()"
+            [disabled]="isSubmitting || !form.valid"
+          >
+            @if (isSubmitting) {
+              <span
+                class="spinner-border spinner-border-sm me-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            }
+            <i class="mdi mdi-check me-2"></i>{{ 'actions.save' | translate }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Backdrop -->
+@if (isVisible) {
+  <div
+    class="modal-backdrop fade show"
+    (click)="closeModal()"
+    [style.pointer-events]="isSubmitting ? 'none' : 'auto'"
+  ></div>
+}

@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'nouislider/dist/nouislider.css';
+
+@import 'quill/dist/quill.bubble.css';
+@import 'quill/dist/quill.snow.css';
+@import '../node_modules/jsvectormap/dist/css/jsvectormap.css';
+
+@import 'assets/scss/icons.scss';
+@import 'assets/scss/app-saas.scss';
+
+.apex-charts {
+  div {
+    min-height: 0 !important;
+  }
+}
+
+.emoji-mart {
+  position: absolute;
+  bottom: 30px;
+  right: 0;
+}
+
+.emoji-mart-preview {
+  display: none;
+}
+
+// Estilos personalizados para SweetAlert2
+.swal-popup-modern {
+  border-radius: 1rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.swal-confirm-modern {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal-confirm-modern:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+}
+
+.swal-cancel-modern {
+  background: #6b7280 !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal-cancel-modern:hover {
+  background: #4b5563 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(107, 114, 128, 0.4) !important;
+}

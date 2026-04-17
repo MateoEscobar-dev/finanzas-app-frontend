@@ -1,0 +1,11 @@
+{
+  "messages": {
+    "success": "Success",
+    "created_success": "Record created successfully",
+    "updated_success": "Record updated successfully",
+    "deleted_success": "Record deleted successfully",
+    "warning": "Warning",
+    "info": "Information",
+    "no_history": "No history records found"
+  }
+}

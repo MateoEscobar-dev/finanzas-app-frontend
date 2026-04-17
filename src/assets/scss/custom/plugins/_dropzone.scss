@@ -1,0 +1,42 @@
+//
+// dropzone.scss
+//
+
+.dropzone {
+  border: 0 !important;
+  padding: 0 !important;
+
+  .dropzone.dz-wrapper {
+    border: 2px dashed $input-border-color !important;
+    background: $input-bg;
+    border-radius: 6px;
+    cursor: pointer;
+    min-height: 150px !important;
+    padding: 20px !important;
+
+    .dz-message {
+      text-align: center;
+      margin: 2rem 0;
+      min-height: 50px;
+      background-color: transparent !important;
+      border: 0;
+      .dz-text {
+        font-size: 15PX !important;
+        font-weight: 500;
+      }
+    }
+    &.dz-started {
+      .dz-message {
+        display: none;
+      }
+    }
+  }
+}
+[data-bs-theme] {
+  .dropzone.dz-wrapper {
+    border-radius: 0px !important;
+  }
+  .dz-message {
+    color: #aab8c5;
+  }
+}

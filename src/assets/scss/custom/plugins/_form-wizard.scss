@@ -1,0 +1,46 @@
+//
+// formm-wizard.scss
+//
+
+.form-wizard-header,
+.stepper-header {
+  .steps {
+    padding: 0 !important;
+
+    &.active {
+      background-color: $primary;
+      color: $white;
+    }
+
+    .nav-link {
+      background-color: var(--#{$prefix}tertiary-bg) !important;
+    }
+  }
+  margin-left: -1.5rem !important;
+  margin-right: -1.5rem !important;
+  background-color: var(--#{$prefix}tertiary-bg) !important;
+}
+
+.stepper {
+  .stepper-header {
+    .steps {
+      padding: 0 !important;
+
+      .step {
+        .nav-link {
+          color: var(--#{$prefix}secondary-color);
+
+          &:hover {
+            color: $primary;
+          }
+        }
+        &.active {
+          .nav-link {
+            background-color: $primary !important;
+            color: $white !important;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light" data-layout-mode="fluid" data-menu-color="light" data-topbar-color="brand" data-layout-position="fixed" data-sidenav-size="default" class="menuitem-active">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Hyper</title>
+  <base href="/" />
+  <!-- <base href="/hyper_ng/" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <meta name="description"
+    content="Hyper is a feature-rich dashboard and admin template that offers a vast collection of UI elements, components, widgets, and pages to help you build web applications quickly and efficiently. Its clean and adaptable layout is fully customizable, making it the ideal choice for developers and designers who want to save time and create high-quality solutions for their clients. Whether you’re building custom admin panels, dashboards, CRMs, CMSs, e-commerce panels, or other types of web applications, Hyper has got you covered." />
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbvyBxmMbFhrzP9Z8moyYr6dCr-pzjhBE"></script>
+  <style>
+    #splash-screen {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      background: white;
+      display: flex;
+      height: 100%;
+      width: 100%;
+      transform: translate(-50%, -50%);
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: all 15s linear;
+      overflow: hidden;
+    }
+
+    #splash-screen.remove {
+      animation: fadeout 0.7s forwards;
+      z-index: 0;
+    }
+
+    @keyframes fadeout {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <app-root> </app-root>
+  <div id="splash-screen">
+    <img alt="Logo" class="light" src="./assets/images/logo-dark.png" style="height: 5%" />
+  </div>
+  <script>
+    const splashScreen = document.querySelector('#splash-screen');
+    if (splashScreen) {
+      splashScreen.classList.add('remove');
+    }
+  </script>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+</body>
+
+</html>

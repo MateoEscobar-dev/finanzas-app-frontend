@@ -1,0 +1,73 @@
+<app-account-wrapper>
+  <div class="text-center w-75 m-auto mb-4">
+    <h4 class="text-dark-50 fw-bold">Bienvenido a SCMChannel</h4>
+    <p class="text-muted">Ingresa tus credenciales para continuar</p>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!-- Usuario o Correo -->
+    <div class="mb-3">
+      <label for="emailaddress" class="form-label">Usuario o correo</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="ri-user-line"></i></span>
+        <input
+          class="form-control"
+          type="email"
+          id="emailaddress"
+          formControlName="email"
+          placeholder="Ej. usuario@empresa.com"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <div class="input-group input-group-merge">
+        <span class="input-group-text"
+          ><i class="ri-lock-password-line"></i
+        ></span>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Ingresa tu contraseña"
+          autocomplete="off"
+        />
+        <span
+          class="input-group-text"
+          (click)="showPassword = !showPassword"
+          style="cursor: pointer"
+        >
+          <i [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
+        </span>
+      </div>
+      <div class="text-end">
+        <a routerLink="/pages-recoverpw" class="text-muted"
+          ><small>¿Olvidaste tu contraseña?</small></a
+        >
+      </div>
+    </div>
+
+    <!-- Recordarme -->
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="checkbox-signin" />
+      <label class="form-check-label" for="checkbox-signin">Recordarme</label>
+    </div>
+
+    <!-- Botón de inicio -->
+    <div class="mb-3 text-center">
+      <button class="btn btn-primary w-100" type="submit">
+        Iniciar sesión
+      </button>
+    </div>
+  </form>
+
+  <div class="text-center">
+    <p class="text-muted mb-0">
+      <a routerLink="/register" class="fw-semibold text-primary">Regístrate</a>
+    </p>
+  </div>
+</app-account-wrapper>

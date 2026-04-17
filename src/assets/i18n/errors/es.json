@@ -1,0 +1,16 @@
+{
+  "errors": {
+    "error": "Error",
+    "load": "Error al cargar los datos",
+    "load_record": "No se pudo cargar el registro",
+    "create": "Error al crear el registro",
+    "update": "Error al actualizar el registro",
+    "delete": "Error al eliminar el registro",
+    "validation": "Error de validación",
+    "unauthorized": "No autorizado",
+    "forbidden": "Prohibido",
+    "not_found": "No encontrado",
+    "server_error": "Error del servidor",
+    "network_error": "Error de red"
+  }
+}

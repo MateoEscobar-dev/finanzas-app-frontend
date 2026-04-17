@@ -1,0 +1,10 @@
+<div class="modern-spinner-overlay">
+  <div class="modern-spinner-card">
+    <div class="loader"></div>
+
+    <div class="modern-spinner-text">
+      <h2 *ngIf="showTitle">{{ translationService.get(title, title) }}</h2>
+      <p *ngIf="showMessage">{{ translationService.get(message, message) }}</p>
+    </div>
+  </div>
+</div>

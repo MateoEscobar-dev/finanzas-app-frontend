@@ -1,0 +1,323 @@
+<div class="table-wrapper">
+  <!-- BARRA DE CONTROL -->
+  <div class="d-lg-flex align-items-center justify-content-between pb-3 mb-3 border-bottom">
+    <!-- Búsqueda y filtros -->
+    <div class="d-inline-flex align-items-center gap-2">
+      @if (config.searchable) {
+        <label class="me-2">{{ "search" | translate }}:</label>
+        <input
+          type="search"
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="searchTerm()"
+          class="form-control form-control-sm"
+          [placeholder]="'search_description' | translate"
+          style="min-width: 250px"
+        />
+      }
+
+      @if (config.enablePagination) {
+        <label class="ms-3 me-2">{{ "actions.per_page" | translate }}:</label>
+        <select
+          [(ngModel)]="pageSize"
+          (change)="updateTable()"
+          class="form-select form-select-sm"
+          style="width: 100px"
+        >
+          <option [ngValue]="5">5</option>
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="20">20</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option>
+        </select>
+      }
+    </div>
+
+    <!-- Botón Crear y botones personalizados -->
+    <div class="d-flex align-items-center">
+      @if (config.enableCreate && canCreate) {
+        <div>
+          <button
+            class="btn btn-sm btn-success"
+            (click)="onCreateClick()"
+            [disabled]="isLoading"
+          >
+            <i class="mdi mdi-plus"></i> {{ "actions.create" | translate }}
+          </button>
+        </div>
+      }
+
+      @if (config.customButtons && config.customButtons.length) {
+        <div class="ms-2 d-inline-flex align-items-center">
+          @for (btn of config.customButtons; track btn.id) {
+            @if (canShowButton(btn)) {
+              <a
+                class="btn btn-sm me-1"
+                [ngClass]="btn.class || 'btn-primary'"
+                [href]="btn.url"
+                [attr.target]="btn.target || '_blank'"
+                rel="noopener noreferrer"
+              >
+                @if (btn.icon) {
+                  <i [ngClass]="btn.icon"></i>
+                }
+                {{ btn.label | translate }}
+              </a>
+            }
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- TABLA -->
+  <div class="table-responsive">
+    <table [ngClass]="['table', 'table-hover', 'table-sm', config.tableClass]">
+      <!-- ENCABEZADO -->
+      <thead [ngClass]="config.theadClass">
+        <tr>
+          @for (column of config.columns; track column.accessor) {
+            <th
+              [style.cursor]="'pointer'"
+              (click)="handleSort(column.accessor)"
+              class="sortable"
+            >
+              <div class="d-flex align-items-center gap-2">
+                <span>{{ column.header | translate }}</span>
+                @if (sortConfig.key === column.accessor) {
+                  <i
+                    [ngClass]="
+                      sortConfig.direction === 'ascending'
+                        ? 'mdi mdi-arrow-up'
+                        : 'mdi mdi-arrow-down'
+                    "
+                  ></i>
+                }
+              </div>
+            </th>
+          }
+          @if (
+            config.enableEdit ||
+            config.enableDelete ||
+            config.enableView ||
+            config.enableHistory ||
+            config.enableActivate
+          ) {
+            <th style="width: 200px; text-align: center">{{ "actions.actions" | translate }}</th>
+          }
+        </tr>
+      </thead>
+
+      <!-- CUERPO -->
+      <tbody>
+        @if (filteredData.length === 0) {
+          <tr>
+            <td
+              [attr.colspan]="
+                config.columns.length +
+                (config.enableEdit ||
+                config.enableDelete ||
+                config.enableView ||
+                config.enableHistory ||
+                config.enableActivate
+                  ? 1
+                  : 0)
+              "
+              class="text-center py-4 text-muted"
+            >
+              <i class="mdi mdi-inbox-outline" style="font-size: 2rem"></i>
+              <p class="mt-2">{{ "actions.no_data" | translate }}</p>
+            </td>
+          </tr>
+        } @else {
+          @for (row of filteredData; track $index) {
+            <tr [ngClass]="{ 'bg-light': $index % 2 === 0 }">
+              @for (column of config.columns; track column.accessor) {
+                <td>
+                  @if (column.Cell) {
+                    <span [innerHTML]="sanitizeHtml(column.Cell({ row }))"></span>
+                  } @else {
+                    {{ getColumnValue(row, column.accessor) }}
+                  }
+                </td>
+              }
+
+              <!-- COLUMNA DE ACCIONES -->
+              @if (
+                config.enableEdit ||
+                config.enableDelete ||
+                config.enableView ||
+                config.enableHistory ||
+                config.enableActivate
+              ) {
+                <td class="text-center">
+                  <div class="btn-group btn-group-sm" role="group">
+                    <!-- Ver -->
+                    @if (config.enableView && canView) {
+                      <button
+                        type="button"
+                        class="btn btn-info"
+                        [title]="'actions.view' | translate"
+                        (click)="onViewClick(row)"
+                        [disabled]="isLoading"
+                      >
+                        <i class="mdi mdi-eye"></i>
+                      </button>
+                    }
+
+                    <!-- Editar -->
+                    @if (config.enableEdit && canEdit) {
+                      <button
+                        type="button"
+                        class="btn btn-info"
+                        [title]="'actions.edit' | translate"
+                        (click)="onEditClick(row)"
+                        [disabled]="isLoading"
+                      >
+                        <i class="mdi mdi-pencil"></i>
+                      </button>
+                    }
+
+                    <!-- Historial -->
+                    @if (config.enableHistory && canHistory) {
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        [title]="'actions.history' | translate"
+                        (click)="onHistoryClick(row)"
+                        [disabled]="isLoading"
+                      >
+                        <i class="mdi mdi-history"></i>
+                      </button>
+                    }
+
+                    <!-- Activar -->
+                    @if (config.enableActivate && isInactive(row) && canActivate) {
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        [title]="'actions.activate' | translate"
+                        (click)="onActivateClick(row)"
+                        [disabled]="isLoading"
+                      >
+                        <i class="mdi mdi-check-circle"></i>
+                      </button>
+                    }
+
+                    <!-- Desactivar -->
+                    @if (config.enableActivate && isActive(row) && canActivate) {
+                      <button
+                        type="button"
+                        class="btn btn-warning"
+                        [title]="'actions.deactivate' | translate"
+                        (click)="onDeactivateClick(row)"
+                        [disabled]="isLoading"
+                      >
+                        <i class="mdi mdi-close-circle"></i>
+                      </button>
+                    }
+
+                    <!-- Eliminar -->
+                    @if (config.enableDelete && canDelete) {
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        [title]="'actions.delete' | translate"
+                        (click)="onDeleteClick(row)"
+                        [disabled]="isLoading"
+                      >
+                        <i class="mdi mdi-trash-can"></i>
+                      </button>
+                    }
+                  </div>
+                </td>
+              }
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGINACIÓN -->
+  @if (config.enablePagination && totalPages > 1) {
+    <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+      <div class="text-muted small">
+        {{ "actions.showing" | translate }} {{ (activePage - 1) * pageSize + 1 }}
+        {{ "actions.of" | translate }}
+        {{ activePage * pageSize > (config.data?.length || 0) ? (config.data?.length || 0) : activePage * pageSize }} {{ "actions.of" | translate }}
+        {{ config.data?.length }} {{ "actions.entries" | translate }}
+      </div>
+
+      <nav>
+        <ul class="pagination pagination-sm mb-0">
+          <li class="page-item" [ngClass]="{ disabled: activePage === 1 }">
+            <button
+              class="page-link"
+              (click)="changePage(1)"
+              [disabled]="activePage === 1"
+            >
+              ⟨⟨
+            </button>
+          </li>
+
+          <li class="page-item" [ngClass]="{ disabled: activePage === 1 }">
+            <button
+              class="page-link"
+              (click)="changePage(activePage - 1)"
+              [disabled]="activePage === 1"
+            >
+              ⟨
+            </button>
+          </li>
+
+          @for (page of generatePageNumbers(); track page) {
+            @if (page - activePage <= 2 && page - activePage >= -2 || page === 1 || page === totalPages) {
+              <li class="page-item" [ngClass]="{ active: activePage === page }">
+                <button
+                  class="page-link"
+                  (click)="changePage(page)"
+                  [ngClass]="{ active: activePage === page }"
+                >
+                  {{ page }}
+                </button>
+              </li>
+            } @else if (page === 2 && activePage > 4) {
+              <li class="page-item disabled">
+                <span class="page-link">...</span>
+              </li>
+            }
+          }
+
+          <li class="page-item" [ngClass]="{ disabled: activePage === totalPages }">
+            <button
+              class="page-link"
+              (click)="changePage(activePage + 1)"
+              [disabled]="activePage === totalPages"
+            >
+              ⟩
+            </button>
+          </li>
+
+          <li class="page-item" [ngClass]="{ disabled: activePage === totalPages }">
+            <button
+              class="page-link"
+              (click)="changePage(totalPages)"
+              [disabled]="activePage === totalPages"
+            >
+              ⟩⟩
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  }
+
+  <!-- LOADING -->
+  @if (isLoading) {
+    <div class="overlay-loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  }
+</div>

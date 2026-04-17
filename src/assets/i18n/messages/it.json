@@ -1,0 +1,10 @@
+{
+  "messages": {
+    "success": "Successo",
+    "created_success": "Record creato con successo",
+    "updated_success": "Record aggiornato con successo",
+    "deleted_success": "Record eliminato con successo",
+    "warning": "Avvertenza",
+    "info": "Informazioni"
+  }
+}
