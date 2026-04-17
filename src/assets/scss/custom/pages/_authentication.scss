@@ -30,6 +30,9 @@ html[data-theme="dark"] {
 
 // authentication pages background
 body.authentication-bg {
+    background: linear-gradient(150deg, #0f172a 0%, #1e293b 55%, #0f2d1f 100%) !important;
+    --ct-primary-rgb: 16, 185, 129;
+
     .account-pages {
         align-items: center;
         display: flex;

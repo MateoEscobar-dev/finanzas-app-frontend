@@ -1,168 +1,204 @@
+import { AutenticacionService } from '@/app/services/autenticacion/autenticacion.service'
+import { environment } from '@/environments/environment'
 import { CommonModule } from '@angular/common'
 import { Component, inject, OnInit } from '@angular/core'
 import {
-  FormBuilder,
+  AbstractControl,
   FormGroup,
   FormsModule,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { RouterModule } from '@angular/router'
+import { Router, RouterModule } from '@angular/router'
 import { AccountWrapperComponent } from '@auth/account-wrapper.component'
-import { Store } from '@ngrx/store'
-import { register } from '@store/authentication/authentication.actions'
+import Swal from 'sweetalert2'
+
+function ageValidator(minAge: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) return null
+    const birthDate = new Date(control.value)
+    if (isNaN(birthDate.getTime())) return { invalidDate: true }
+    const today = new Date()
+    if (birthDate > today) return { futureDate: true }
+    const yearDiff = today.getFullYear() - birthDate.getFullYear()
+    const monthDiff = today.getMonth() - birthDate.getMonth()
+    const dayDiff = today.getDate() - birthDate.getDate()
+    const hasHadBirthday = monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)
+    const age = hasHadBirthday ? yearDiff : yearDiff - 1
+    if (age < minAge) return { underage: { required: minAge, actual: age } }
+    return null
+  }
+}
 
 @Component({
-    selector: 'app-register',
-    imports: [
-        CommonModule,
-        AccountWrapperComponent,
-        RouterModule,
-        FormsModule,
-        ReactiveFormsModule,
-    ],
-    template: `
-    <app-account-wrapper>
-      <div class="text-center w-75 m-auto">
-        <h4 class="text-dark-50 text-center mt-0 fw-bold">Free Sign Up</h4>
-        <p class="text-muted mb-4">
-          Don't have an account? Create your account, it takes less than a
-          minute
-        </p>
-      </div>
+  selector: 'app-register',
+  imports: [
+    CommonModule,
+    AccountWrapperComponent,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  templateUrl: './register.component.html',
+  styles: `
+    .finance-input {
+      border-radius: 8px;
+      border: 1.5px solid #e2e8f0;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
-      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" action="#">
-        <div class="mb-3">
-          <label for="fullname" class="form-label">Full Name</label>
-          <input
-            class="form-control"
-            type="text"
-            id="fullname"
-            formControlName="name"
-            placeholder="Enter your name"
-            required
-            [ngClass]="{
-              'is-invalid': formSubmitted && formValues['email'].invalid
-            }"
-          />
-        </div>
+      &:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+      }
+    }
 
-        <div class="mb-3">
-          <label for="emailaddress" class="form-label">Email address</label>
-          <input
-            class="form-control"
-            type="email"
-            id="emailaddress"
-            required
-            formControlName="email"
-            placeholder="Enter your email"
-            [ngClass]="{
-              'is-invalid': formSubmitted && formValues['email'].invalid
-            }"
-          />
-        </div>
+    .finance-toggle-btn {
+      border-radius: 0 8px 8px 0;
+      border-color: #e2e8f0;
+      background: #f8fafc;
+      color: #94a3b8;
 
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <div class="input-group input-group-merge">
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              id="password"
-              class="form-control"
-              formControlName="password"
-              placeholder="Enter your password"
-              [ngClass]="{
-                'is-invalid': formSubmitted && formValues['password'].invalid
-              }"
-            />
-            <div
-              class="input-group-text"
-              [ngClass]="{ 'show-password': showPassword }"
-              (click)="showPassword = !showPassword"
-            >
-              <span class="password-eye"></span>
-            </div>
-          </div>
-        </div>
+      &:hover {
+        background-color: #f1f5f9;
+        color: #059669;
+        border-color: #10b981;
+      }
+    }
 
-        <div class="mb-3">
-          <div class="form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="checkbox-signup"
-            />
-            <label class="form-check-label" for="checkbox-signup"
-              >I accept
-              <a href="javascript:void(0)" class="text-muted"
-                >Terms and Conditions</a
-              ></label
-            >
-          </div>
-        </div>
+    .finance-btn {
+      background: #10b981;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
 
-        <div class="mb-3 text-center">
-          <button class="btn btn-primary" type="submit">Sign Up</button>
-        </div>
-      </form>
+      &:hover:not(:disabled) {
+        background: #059669;
+        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.28);
+        color: #ffffff;
+      }
 
-      <ng-template #bottomLinks>
-        <div class="row mt-3">
-          <div class="col-12 text-center">
-            <p class="text-muted">
-              Already have account?
-              <a routerLink="/pages-login" class="text-muted ms-1"
-                ><b>Log In</b></a
-              >
-            </p>
-          </div>
-          <!-- end col-->
-        </div>
-        <!-- end row -->
-      </ng-template>
-    </app-account-wrapper>
+      &:disabled {
+        opacity: 0.65;
+      }
+    }
+
+    .finance-link {
+      color: #059669;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        color: #047857;
+        text-decoration: underline;
+      }
+    }
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #f1f5f9;
+    }
   `,
-    styles: ``
 })
 export class RegisterComponent implements OnInit {
-  signUpForm!: FormGroup
-  formSubmitted: boolean = false
-  showPassword: boolean = false
+  registerForm!: FormGroup
+  formSubmitted = false
+  showPassword = false
+  isLoading = false
+  appTitle = environment.appTitle
+  maxBirthDate = ''
 
-  private store = inject(Store)
-
-  constructor(private fb: FormBuilder) {}
+  private fb = inject(NonNullableFormBuilder)
+  private autenticacionService = inject(AutenticacionService)
+  private router = inject(Router)
 
   ngOnInit(): void {
-    this.signUpForm = this.fb.group({
-      name: ['', Validators.required],
+    // Fecha máxima: hoy - 15 años
+    const today = new Date()
+    today.setFullYear(today.getFullYear() - 15)
+    this.maxBirthDate = today.toISOString().split('T')[0]
+
+    this.registerForm = this.fb.group({
+      document: ['', [Validators.required, Validators.minLength(4)]],
+      first_name: ['', [Validators.required, Validators.minLength(2)]],
+      second_name: [''],
+      first_last_name: ['', [Validators.required, Validators.minLength(2)]],
+      second_last_name: [''],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      phone: [''],
+      phone_ext: [''],
+      birth_day: ['', [Validators.required, ageValidator(15)]],
     })
   }
 
-  /**
-   * convenience getter for easy access to form fields
-   */
-  get formValues() {
-    return this.signUpForm.controls
+  get f() {
+    return this.registerForm.controls
   }
 
-  /**
-   * On form submit
-   */
+  isInvalid(field: string): boolean {
+    const ctrl = this.f[field]
+    return this.formSubmitted && ctrl.invalid
+  }
+
   onSubmit(): void {
     this.formSubmitted = true
+    this.registerForm.markAllAsTouched()
 
-    const email = this.formValues['email'].value
-    const name = this.formValues['name'].value
-    const password = this.formValues['password'].value
-
-    if (this.signUpForm.valid) {
-      //Dispatch Action
-      this.store.dispatch(
-        register({ username: name, email: email, password: password })
-      )
+    if (this.registerForm.invalid) {
+      return
     }
+
+    this.isLoading = true
+    const raw = this.registerForm.getRawValue()
+
+    this.autenticacionService
+      .registrarUsuario({
+        document: raw['document'],
+        first_name: raw['first_name'],
+        second_name: raw['second_name'] || undefined,
+        first_last_name: raw['first_last_name'],
+        second_last_name: raw['second_last_name'] || undefined,
+        email: raw['email'],
+        password: raw['password'],
+        phone: raw['phone'] || undefined,
+        phone_ext: raw['phone_ext'] || undefined,
+        birth_day: raw['birth_day'],
+      })
+      .subscribe({
+        next: () => {
+          this.isLoading = false
+          Swal.fire({
+            title: '¡Registro exitoso!',
+            text: 'Tu cuenta ha sido creada. Ahora puedes iniciar sesión.',
+            icon: 'success',
+            confirmButtonText: 'Ir al login',
+            confirmButtonColor: '#10b981',
+          }).then(() => {
+            this.router.navigate(['/login'])
+          })
+        },
+        error: () => {
+          this.isLoading = false
+          Swal.fire({
+            title: 'Error al registrarse',
+            text: 'No fue posible crear la cuenta. Intenta de nuevo.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#10b981',
+          })
+        },
+      })
   }
 }
+

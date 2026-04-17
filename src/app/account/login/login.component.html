@@ -1,34 +1,34 @@
 <app-account-wrapper>
   <!-- Header -->
-  <div class="text-center w-75 m-auto mb-4">
-    <div class="finance-icon-wrapper mb-2">
+  <div class="text-center mb-4">
+    <div class="finance-icon-wrapper mb-3">
       <i class="ri-line-chart-fill finance-icon"></i>
     </div>
-    <h4 class="fw-bold finance-title">{{ appTitle }}</h4>
-    <p class="text-muted mb-0">{{ appDescription }}</p>
+    <h5 class="fw-bold finance-title mb-1">{{ appTitle }}</h5>
+    <p class="text-muted small mb-0">{{ appDescription }}</p>
   </div>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
     <!-- Usuario o Correo -->
     <div class="mb-3">
-      <label for="emailaddress" class="form-label fw-semibold">
-        <i class="ri-user-line me-1 text-muted"></i>Usuario o correo
-      </label>
+      <label for="emailaddress" class="form-label fw-semibold text-secondary small">Usuario o correo</label>
       <input
         class="form-control form-control-lg finance-input"
-        type="email"
+        type="text"
         id="emailaddress"
         formControlName="email"
         placeholder="Ej. usuario&#64;correo.com"
         autocomplete="off"
+        [class.is-invalid]="isInvalid('email')"
       />
+      @if (isInvalid('email')) {
+        <div class="invalid-feedback">Ingresa tu usuario o correo.</div>
+      }
     </div>
 
     <!-- Contraseña -->
     <div class="mb-3">
-      <label for="password" class="form-label fw-semibold">
-        <i class="ri-lock-password-line me-1 text-muted"></i>Contraseña
-      </label>
+      <label for="password" class="form-label fw-semibold text-secondary small">Contraseña</label>
       <div class="input-group">
         <input
           [type]="showPassword ? 'text' : 'password'"
@@ -37,6 +37,7 @@
           formControlName="password"
           placeholder="Ingresa tu contraseña"
           autocomplete="off"
+          [class.is-invalid]="isInvalid('password')"
         />
         <button
           class="btn btn-outline-secondary finance-toggle-btn"
@@ -45,6 +46,9 @@
         >
           <i [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
         </button>
+        @if (isInvalid('password')) {
+          <div class="invalid-feedback">Ingresa tu contraseña.</div>
+        }
       </div>
     </div>
 
@@ -54,13 +58,18 @@
         <input type="checkbox" class="form-check-input" id="checkbox-signin" />
         <label class="form-check-label text-muted small" for="checkbox-signin">Recordarme</label>
       </div>
-      <a routerLink="/pages-recoverpw" class="text-muted small">¿Olvidaste tu contraseña?</a>
+      <a routerLink="/pages-recoverpw" class="finance-link small">¿Olvidaste tu contraseña?</a>
     </div>
 
     <!-- Botón de inicio -->
     <div class="mb-3">
-      <button class="btn btn-lg w-100 finance-btn" type="submit">
-        <i class="ri-login-box-line me-1"></i>Iniciar sesión
+      <button class="btn btn-lg w-100 finance-btn" type="submit" [disabled]="isLoading">
+        @if (isLoading) {
+          <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+          Verificando...
+        } @else {
+          <i class="ri-login-box-line me-1"></i>Iniciar sesión
+        }
       </button>
     </div>
   </form>
