@@ -1,9 +1,8 @@
-import { Component } from '@angular/core'
-import { HORIZONTAL_MENU, MENU } from '../shared/menu-meta'
+import { Component, OnInit, AfterViewInit } from '@angular/core'
+import { HORIZONTAL_MENU } from '../shared/menu-meta'
 import { MenuItem } from '../shared/models/menu.model'
 import { CommonModule } from '@angular/common'
 import { NavigationEnd, Router, RouterModule } from '@angular/router'
-import { of } from 'rxjs'
 import { TranslateModule, TranslateService } from '@ngx-translate/core'
 import { findAllParent, findMenuItem } from '../shared/helper/utils'
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'
@@ -14,7 +13,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'
   templateUrl: './horizontal-topbar.component.html',
   styles: ``,
 })
-export class HorizontalTopbarComponent {
+export class HorizontalTopbarComponent implements OnInit, AfterViewInit {
   menuItems: MenuItem[] = []
   activeMenuItems: string[] = []
 
@@ -46,7 +45,7 @@ export class HorizontalTopbarComponent {
     const div = document.getElementById('topnav-menu-content')
     let matchingMenuItem = null
     if (div) {
-      let items: HTMLCollectionOf<HTMLAnchorElement> =
+      const items: HTMLCollectionOf<HTMLAnchorElement> =
         div.getElementsByClassName(
           'nav-link-ref'
         ) as HTMLCollectionOf<HTMLAnchorElement>

@@ -1,4 +1,4 @@
-export type Column<T> = {
+export interface Column<T> {
   header: string
   accessor: string
   defaultCanSort?: boolean
@@ -6,11 +6,11 @@ export type Column<T> = {
   type?: string
 }
 
-export type TableInstance<T> = {
+export interface TableInstance<T> {
   columns: Column<T>[]
   data: T[]
 }
 
-export type CellFormatter<T> = {
+export interface CellFormatter<T> {
   row: T
 }

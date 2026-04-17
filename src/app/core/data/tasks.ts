@@ -37,8 +37,7 @@ const todayTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB', logo: '.ZIP' },
       {
@@ -88,8 +87,7 @@ const todayTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB' },
       { id: 2, filename: 'new-contarcts.docx', size: '1.3 MB' },
@@ -134,8 +132,7 @@ const todayTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB' },
       { id: 2, filename: 'new-contarcts.docx', size: '1.3 MB' },
@@ -183,8 +180,7 @@ const upcomingTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB' },
       { id: 2, filename: 'new-contarcts.docx', size: '1.3 MB' },
@@ -229,8 +225,7 @@ const upcomingTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB' },
       { id: 2, filename: 'new-contarcts.docx', size: '1.3 MB' },
@@ -275,8 +270,7 @@ const upcomingTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB' },
       { id: 2, filename: 'new-contarcts.docx', size: '1.3 MB' },
@@ -324,8 +318,7 @@ const otherTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB' },
       { id: 2, filename: 'new-contarcts.docx', size: '1.3 MB' },
@@ -370,8 +363,7 @@ const otherTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB' },
       { id: 2, filename: 'new-contarcts.docx', size: '1.3 MB' },
@@ -416,8 +408,7 @@ const otherTasks: ListTaskItem[] = [
       },
     ],
     description:
-      // tslint:disable-next-line: max-line-length
-      '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
+           '<p>This is a task description with markup support</p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p>End of air-mode area</p>',
     attachments: [
       { id: 1, filename: 'sales-assets.zip', size: '2.3 MB' },
       { id: 2, filename: 'new-contarcts.docx', size: '1.3 MB' },

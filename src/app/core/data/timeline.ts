@@ -3,7 +3,7 @@ const small2 = 'assets/images/small/small-2.jpg'
 const small3 = 'assets/images/small/small-3.jpg'
 const avatar3 = 'assets/images/users/avatar-3.jpg'
 
-type TimelineData = {
+interface TimelineData {
   key: string
   items: {
     title: string

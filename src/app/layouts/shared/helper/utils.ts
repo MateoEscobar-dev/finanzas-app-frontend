@@ -23,11 +23,11 @@ export const findMenuItem = (
   menuItemKey: MenuItem['key'] | undefined
 ): MenuItem | null => {
   if (menuItems && menuItemKey) {
-    for (var i = 0; i < menuItems.length; i++) {
+    for (let i = 0; i < menuItems.length; i++) {
       if (menuItems[i].key === menuItemKey) {
         return menuItems[i]
       }
-      var found = findMenuItem(menuItems[i].subMenu, menuItemKey)
+      const found = findMenuItem(menuItems[i].subMenu, menuItemKey)
       if (found) return found
     }
   }

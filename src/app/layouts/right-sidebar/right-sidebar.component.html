@@ -22,7 +22,7 @@
                 type="radio"
                 value="vertical"
                 class="form-check-input"
-                [checked]="layout == 'vertical'"
+                [checked]="layout === 'vertical'"
                 (change)="changeLayout('vertical')"
               />
               <label
@@ -69,7 +69,7 @@
                 type="radio"
                 value="horizontal"
                 class="form-check-input"
-                [checked]="layout == 'horizontal'"
+                [checked]="layout === 'horizontal'"
                 (change)="changeLayout('horizontal')"
               />
               <label
@@ -116,7 +116,7 @@
                   name="data-bs-theme"
                   id="layout-color-light"
                   value="light"
-                  [checked]="color == 'light'"
+                  [checked]="color === 'light'"
                   (change)="changeLayoutColor('light')"
                 />
                 <label
@@ -195,7 +195,7 @@
                   name="data-bs-theme"
                   id="layout-color-dark"
                   value="dark"
-                  [checked]="color == 'dark'"
+                  [checked]="color === 'dark'"
                   (change)="changeLayoutColor('dark')"
                 />
                 <label
@@ -276,7 +276,7 @@
                   name="data-layout-mode"
                   id="layout-mode-fluid"
                   value="fluid"
-                  [checked]="mode == 'fluid'"
+                  [checked]="mode === 'fluid'"
                   (change)="changeLayoutMode('fluid')"
                 />
                 <label
@@ -350,7 +350,7 @@
                   name="data-layout-mode"
                   id="layout-mode-boxed"
                   value="boxed"
-                  [checked]="mode == 'boxed'"
+                  [checked]="mode === 'boxed'"
                   (change)="changeLayoutMode('boxed')"
                 />
                 <label
@@ -425,7 +425,7 @@
                   name="data-layout-mode"
                   id="data-layout-detached"
                   value="detached"
-                  [checked]="mode == 'detached'"
+                  [checked]="mode === 'detached'"
                   (change)="changeLayoutMode('detached')"
                 />
                 <label
@@ -489,7 +489,7 @@
                 name="data-topbar-color"
                 id="topbar-color-light"
                 value="light"
-                [checked]="topbar == 'light'"
+                [checked]="topbar === 'light'"
                 (change)="changeTopbar('light')"
               />
               <label
@@ -564,7 +564,7 @@
                 name="data-topbar-color"
                 id="topbar-color-dark"
                 value="dark"
-                [checked]="topbar == 'dark'"
+                [checked]="topbar === 'dark'"
                 (change)="changeTopbar('dark')"
               />
               <label
@@ -639,7 +639,7 @@
                 name="data-topbar-color"
                 id="topbar-color-brand"
                 value="brand"
-                [checked]="topbar == 'brand'"
+                [checked]="topbar === 'brand'"
                 (change)="changeTopbar('brand')"
               />
               <label
@@ -719,7 +719,7 @@
                   name="data-menu-color"
                   id="leftbar-color-light"
                   value="light"
-                  [checked]="menucolor == 'light'"
+                  [checked]="menucolor === 'light'"
                   (change)="changeMenu('light')"
                 />
                 <label
@@ -794,7 +794,7 @@
                   name="data-menu-color"
                   id="leftbar-color-dark"
                   value="dark"
-                  [checked]="menucolor == 'dark'"
+                  [checked]="menucolor === 'dark'"
                   (change)="changeMenu('dark')"
                 />
                 <label
@@ -866,7 +866,7 @@
                   name="data-menu-color"
                   id="leftbar-color-brand"
                   value="brand"
-                  [checked]="menucolor == 'brand'"
+                  [checked]="menucolor === 'brand'"
                   (change)="changeMenu('brand')"
                 />
                 <label
@@ -947,7 +947,7 @@
                   name="data-sidenav-size"
                   id="leftbar-size-default"
                   value="default"
-                  [checked]="sidebarsize == 'default'"
+                  [checked]="sidebarsize === 'default'"
                   (change)="changeSize('default')"
                 />
                 <label
@@ -995,7 +995,7 @@
                   name="data-sidenav-size"
                   id="leftbar-size-compact"
                   value="compact"
-                  [checked]="sidebarsize == 'compact'"
+                  [checked]="sidebarsize === 'compact'"
                   (change)="changeSize('compact')"
                 />
                 <label
@@ -1043,7 +1043,7 @@
                   name="data-sidenav-size"
                   id="leftbar-size-small"
                   value="condensed"
-                  [checked]="sidebarsize == 'condensed'"
+                  [checked]="sidebarsize === 'condensed'"
                   (change)="changeSize('condensed')"
                 />
                 <label
@@ -1092,7 +1092,7 @@
                   name="data-sidenav-size"
                   id="leftbar-size-small-hover"
                   value="sm-hover"
-                  [checked]="sidebarsize == 'sm-hover'"
+                  [checked]="sidebarsize === 'sm-hover'"
                   (change)="changeSize('sm-hover')"
                 />
                 <label
@@ -1141,7 +1141,7 @@
                   name="data-sidenav-size"
                   id="leftbar-size-full"
                   value="full"
-                  [checked]="sidebarsize == 'full'"
+                  [checked]="sidebarsize === 'full'"
                   (change)="changeSize('full')"
                 />
                 <label
@@ -1173,7 +1173,7 @@
                   name="data-sidenav-size"
                   id="leftbar-size-fullscreen"
                   value="fullscreen"
-                  [checked]="sidebarsize == 'fullscreen'"
+                  [checked]="sidebarsize === 'fullscreen'"
                   (change)="changeSize('fullscreen')"
                 />
                 <label
@@ -1206,7 +1206,7 @@
               name="data-layout-position"
               id="layout-position-fixed"
               value="fixed"
-              [checked]="position == 'fixed'"
+              [checked]="position === 'fixed'"
               (change)="changeLayoutPosition('fixed')"
             />
             <label class="btn btn-soft-primary w-sm" for="layout-position-fixed"
@@ -1219,7 +1219,7 @@
               name="data-layout-position"
               id="layout-position-scrollable"
               value="scrollable"
-              [checked]="position == 'scrollable'"
+              [checked]="position === 'scrollable'"
               (change)="changeLayoutPosition('scrollable')"
             />
             <label

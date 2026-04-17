@@ -1,4 +1,4 @@
-export type LinkActionContext = {
+export interface LinkActionContext {
   field: string;
   value: any;
   display?: string;
@@ -10,7 +10,7 @@ export type LinkActionContext = {
   idMovimientoEnlace?: number;
   searchSvc?: any;
   translationService?: any;
-};
+}
 
 export type Handler = (ctx: LinkActionContext) => void | Promise<void>;
 export type LinkActionMap = Record<string, Handler>;

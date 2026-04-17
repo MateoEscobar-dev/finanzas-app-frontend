@@ -22,7 +22,7 @@ import { features } from '@core/data'
           </div>
         </div>
         @for (data of featureData; track $index) {
-          @if ($index % 2 == 0) {
+          @if ($index % 2 === 0) {
             <div class="row mt-2 py-5 align-items-center">
               <div class="col-lg-5 col-md-6">
                 <img src="{{ data.image }}" class="img-fluid" alt="" />

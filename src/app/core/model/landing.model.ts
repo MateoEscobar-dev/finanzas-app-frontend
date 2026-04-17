@@ -1,4 +1,4 @@
-export type Feature = {
+export interface Feature {
   id: number
   title: string
   desc: string
@@ -6,12 +6,12 @@ export type Feature = {
   features: string[]
 }
 
-export type LayoutDemo = {
+export interface LayoutDemo {
   image: string
   layout: string
 }
 
-export type Service = {
+export interface Service {
   icon: string
   title: string
   description: string

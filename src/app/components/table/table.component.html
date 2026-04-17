@@ -74,7 +74,7 @@
                 <div
                   [innerHTML]="sanitizeHtml(column.Cell({ row: item }))"
                 ></div>
-              } @else if (column.type == 'chart') {
+              } @else if (column.type === 'chart') {
                 <apx-chart
                   [chart]="item.chart.chart!"
                   [series]="item.chart.series!"

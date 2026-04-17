@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import { RouterModule } from '@angular/router'
-import { AccountWrapperComponent } from '@auth/account-wrapper.component'
 import { BgCirclesComponent } from '@component/bg-circles/bg-circles.component'
 
 @Component({

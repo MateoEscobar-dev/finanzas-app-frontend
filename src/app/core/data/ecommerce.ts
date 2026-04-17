@@ -390,7 +390,7 @@ const customers: Customer[] = [
 ]
 
 function revenueChart() {
-  let arr: number[] = []
+  const arr: number[] = []
   Array.from(new Array(11)).forEach(() => {
     arr.push(Math.floor(Math.random() * 80) + 20)
   })

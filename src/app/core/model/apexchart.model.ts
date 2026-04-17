@@ -2,7 +2,6 @@ import {
   ApexAxisChartSeries,
   ApexNonAxisChartSeries,
   ApexChart,
-  ChartComponent,
   ApexDataLabels,
   ApexPlotOptions,
   ApexYAxis,
@@ -15,12 +14,11 @@ import {
   ApexResponsive,
   ApexAnnotations,
   ApexGrid,
-  ApexStates,
   ApexMarkers,
   ApexTheme,
 } from 'ng-apexcharts'
 
-export type ChartOptions = {
+export interface ChartOptions {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries
   chart: ApexChart
   xaxis: ApexXAxis

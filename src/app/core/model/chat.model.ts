@@ -1,4 +1,4 @@
-export type ChatUser = {
+export interface ChatUser {
   id: number
   name: string
   avatar: string
@@ -12,7 +12,7 @@ export type ChatUser = {
   groups: string
 }
 
-export type ChatMessage = {
+export interface ChatMessage {
   id: number
   from: ChatUser
   to: ChatUser

@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core'
+import { inject } from '@angular/core'
 import { Router, CanActivateFn, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { PermissionService } from '@/app/core/service/permission.service'
 
@@ -15,7 +15,7 @@ import { PermissionService } from '@/app/core/service/permission.service'
  */
 export const hasPermissionGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
+  _state: RouterStateSnapshot
 ) => {
   const permissionService = inject(PermissionService)
   const router = inject(Router)
@@ -53,7 +53,7 @@ export const hasPermissionGuard: CanActivateFn = (
  */
 export const hasRoleGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
+  _state: RouterStateSnapshot
 ) => {
   const permissionService = inject(PermissionService)
   const router = inject(Router)
@@ -91,7 +91,7 @@ export const hasRoleGuard: CanActivateFn = (
  */
 export const hasAllPermissionsGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
+  _state: RouterStateSnapshot
 ) => {
   const permissionService = inject(PermissionService)
   const router = inject(Router)
@@ -129,7 +129,7 @@ export const hasAllPermissionsGuard: CanActivateFn = (
  */
 export const hasAnyPermissionGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
+  _state: RouterStateSnapshot
 ) => {
   const permissionService = inject(PermissionService)
   const router = inject(Router)

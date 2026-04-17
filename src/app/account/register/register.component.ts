@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import {
   FormBuilder,
   FormGroup,
@@ -124,7 +124,7 @@ import { register } from '@store/authentication/authentication.actions'
   `,
     styles: ``
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   signUpForm!: FormGroup
   formSubmitted: boolean = false
   showPassword: boolean = false

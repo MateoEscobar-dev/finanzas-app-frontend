@@ -1,4 +1,4 @@
-import { Component, Renderer2, inject } from '@angular/core'
+import { Component, Renderer2, inject, OnInit } from '@angular/core'
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap'
 import { Store } from '@ngrx/store'
 import { SimplebarAngularModule } from 'simplebar-angular'
@@ -29,7 +29,7 @@ import {
     templateUrl: './right-sidebar.component.html',
     styles: ``
 })
-export class RightSidebarComponent {
+export class RightSidebarComponent implements OnInit {
   public isRightSidebarOpen: boolean = false
 
     offcanvas = inject(NgbActiveOffcanvas)

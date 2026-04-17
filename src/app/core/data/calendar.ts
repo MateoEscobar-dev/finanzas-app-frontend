@@ -1,6 +1,6 @@
 import { EventInput } from '@fullcalendar/core'
 
-export type externalModel = {
+export interface externalModel {
   id: number
   textClass: string
   className: string

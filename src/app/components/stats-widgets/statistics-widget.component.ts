@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, Input } from '@angular/core'
 
-type dataType = {
+interface dataType {
   label: string
   cardColor: string
   icon: string

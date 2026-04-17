@@ -5,12 +5,10 @@ import {
   Inject,
   Output,
   Renderer2,
-  TemplateRef,
-  inject,
+  inject, OnInit,
 } from '@angular/core'
 import {
   NgbDropdownModule,
-  NgbOffcanvas,
   NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap'
 import { Language } from '../shared/models/language.model'
@@ -23,7 +21,7 @@ import { DOCUMENT } from '@angular/common'
 import { Router, RouterModule } from '@angular/router'
 import { AutenticacionService } from '@/app/services/autenticacion/autenticacion.service'
 
-type FullScreenTypes = {
+interface FullScreenTypes {
   requestFullscreen?: () => Promise<void>
   mozRequestFullScreen?: () => Promise<void>
   mozCancelFullScreen?: () => Promise<void>
@@ -47,7 +45,7 @@ type FullScreenTypes = {
   templateUrl: './topbar.component.html',
   styles: ``,
 })
-export class TopbarComponent {
+export class TopbarComponent implements OnInit {
   languages: Language[] = []
   selectedLanguage?: Language
   element!: FullScreenTypes

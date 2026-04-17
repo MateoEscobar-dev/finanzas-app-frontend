@@ -1,16 +1,16 @@
-export type Member = {
+export interface Member {
   img: string
   name: string
 }
 
-export type Project = {
+export interface Project {
   id: number
   title: string
   state: string
   shortDesc?: string
   totalTasks: number
   totalComments: number
-  memberList: Array<Member>
+  memberList: Member[]
   totalMembers: number
   progress: number
   image?: string
@@ -21,13 +21,13 @@ export type Project = {
   totalBudget?: string
 }
 
-export type TeamMember = {
+export interface TeamMember {
   value: string
   name: string
   image: string
 }
 
-export type GanttProjectItem = {
+export interface GanttProjectItem {
   id: string
   name: string
   status: string

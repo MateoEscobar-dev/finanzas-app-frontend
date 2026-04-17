@@ -1,9 +1,9 @@
-export type PricingPlan = {
+export interface PricingPlan {
   id: number
   name: string
   icon: string
   price: string
   duration: string
-  features: Array<string>
+  features: string[]
   isRecommended: boolean
 }

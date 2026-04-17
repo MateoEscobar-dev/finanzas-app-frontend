@@ -19,7 +19,6 @@ import {
 } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
 import { IFormField } from '@/app/shared/base-component/base-component'
 
 @Component({

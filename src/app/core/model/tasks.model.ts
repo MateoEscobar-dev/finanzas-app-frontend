@@ -1,10 +1,10 @@
-export type CheckListItem = {
+export interface CheckListItem {
   id: number
   title: string
   completed: boolean
 }
 
-export type Comment = {
+export interface Comment {
   id: number
   author: string
   text: string
@@ -13,7 +13,7 @@ export type Comment = {
   replies?: Comment[]
 }
 
-export type AttachmentItem = {
+export interface AttachmentItem {
   id: number
   filename: string
   size: string
@@ -21,7 +21,7 @@ export type AttachmentItem = {
   logo?: string
 }
 
-export type ListTaskItem = {
+export interface ListTaskItem {
   id: number
   title: string
   assignee_avatar: string
@@ -37,7 +37,7 @@ export type ListTaskItem = {
   priority: string
 }
 
-export type KanbanTaskItem = {
+export interface KanbanTaskItem {
   id: number
   title: string
   status: string

@@ -28,13 +28,13 @@ export class CrudService {
   }
 
   addCalendarEvents(newData: EventInput): Observable<EventInput[]> {
-    let newEvents = [...defaultEvents, newData] // Create a new array by spreading defaultEvents and adding newData
+    const newEvents = [...defaultEvents, newData] // Create a new array by spreading defaultEvents and adding newData
     return of(newEvents)
   }
 
   updateCalendarEvents(updatedData: EventInput): Observable<EventInput[]> {
     const index = defaultEvents.findIndex((item) => item.id === updatedData.id)
-    let updatedEvents = defaultEvents.slice()
+    const updatedEvents = defaultEvents.slice()
     if (index !== -1) {
       updatedEvents[index] = updatedData
     }
@@ -86,13 +86,13 @@ export class CrudService {
   }
 
   addkanbantask(newData: KanbanTaskItem): Observable<KanbanTaskItem[]> {
-    let newTasks = [...kanbantasks, newData] // Create a new array by spreading defaultEvents and adding newData
+    const newTasks = [...kanbantasks, newData] // Create a new array by spreading defaultEvents and adding newData
     return of(newTasks)
   }
 
   updatekanbantask(updatedData: KanbanTaskItem): Observable<KanbanTaskItem[]> {
     const index = kanbantasks.findIndex((item) => item.id === updatedData.id)
-    let updatedEvents = kanbantasks.slice()
+    const updatedEvents = kanbantasks.slice()
     if (index !== -1) {
       updatedEvents[index] = updatedData
     }

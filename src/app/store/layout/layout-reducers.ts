@@ -19,7 +19,7 @@ import {
 } from './layout-action'
 import * as appActions from './layout-action'
 
-export type LayoutState = {
+export interface LayoutState {
   LAYOUT: string
   LAYOUT_COLOR: string
   LAYOUT_MODE: string

@@ -1,35 +1,35 @@
-export type AssignTo = {
+export interface AssignTo {
   avatar: string
 }
-export type Project = {
+export interface Project {
   title: string
   task: string
   created_on: string
   members: string[]
 }
 
-export type StatisticsItem = {
+export interface StatisticsItem {
   icon: string
   variant: string
   title: string
   noOfProject: number
 }
 
-export type DailyTask = {
+export interface DailyTask {
   title: string
   shortDesc: string
   time: string
   teamSize: number
 }
 
-export type TeamMember = {
+export interface TeamMember {
   avatar: string
   name: string
   designation: string
   experience: string
 }
 
-export type Order = {
+export interface Order {
   orderId: string
   avatar: string
   name: string
@@ -40,32 +40,32 @@ export type Order = {
   orderStatus: string
 }
 
-export type Client = {
+export interface Client {
   avatar: string
-  verifiedClient?: Boolean
+  verifiedClient?: boolean
   name: string
   emailId: string
   completedProject: number
 }
 
-export type ManagementProject = {
+export interface ManagementProject {
   icon: string
   variant: string
   title: string
   subTitle: string
   hours: number
   task: string
-  assignTo: Array<AssignTo>
+  assignTo: AssignTo[]
 }
 
-export type ManagementClient = {
+export interface ManagementClient {
   avatar: string
   name: string
   companyName: string
   date: string
 }
 
-export type MonthlyProgressItem = {
+export interface MonthlyProgressItem {
   avatar: string
   name: string
   emailId: string
@@ -73,7 +73,7 @@ export type MonthlyProgressItem = {
   status: string
 }
 
-export type ManagementTask = {
+export interface ManagementTask {
   icon: string
   variant: string
   title: string
@@ -82,7 +82,7 @@ export type ManagementTask = {
   progressValue?: number
 }
 
-export type Message = {
+export interface Message {
   id: number
   userPic?: string
   userName: string

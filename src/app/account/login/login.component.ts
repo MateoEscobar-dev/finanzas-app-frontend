@@ -1,8 +1,7 @@
-import { ILogin } from '@/app/interfaces/autenticacion/login.interface'
 import { AutenticacionService } from '@/app/services/autenticacion/autenticacion.service'
 import { environment } from '@/environments/environment'
 import { CommonModule } from '@angular/common'
-import { Component, inject, ViewChild } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import {
   FormGroup,
   FormsModule,
@@ -12,7 +11,6 @@ import {
 } from '@angular/forms'
 import { Router, RouterModule } from '@angular/router'
 import { AccountWrapperComponent } from '@auth/account-wrapper.component'
-import { AuthenticationService } from '@core/service/auth.service'
 import Swal from 'sweetalert2'
 
 @Component({
@@ -26,34 +24,94 @@ import Swal from 'sweetalert2'
   ],
   templateUrl: './login.component.html',
   styles: `
-    .captcha-container {
-      display: flex;
-      flex-direction: column;
+    .finance-icon-wrapper {
+      display: inline-flex;
       align-items: center;
-      margin: 25px 0;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+    }
+
+    .finance-icon {
+      font-size: 1.75rem;
+      color: #ffffff;
+    }
+
+    .finance-title {
+      color: #1a6b4b;
+      letter-spacing: 0.3px;
+    }
+
+    .finance-input {
+      border-radius: 8px;
+      border: 1.5px solid #e2e8f0;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+      }
+    }
+
+    .finance-toggle-btn {
+      border-radius: 0 8px 8px 0;
+      border-color: #e2e8f0;
+      color: #64748b;
+
+      &:hover {
+        background-color: #f1f5f9;
+        color: #10b981;
+      }
+    }
+
+    .finance-btn {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+        color: #ffffff;
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    .finance-link {
+      color: #10b981;
+      text-decoration: none;
+
+      &:hover {
+        color: #059669;
+        text-decoration: underline;
+      }
     }
   `,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup
-  formSubmitted: boolean = false
-  showPassword: boolean = false
+  formSubmitted = false
+  showPassword = false
+  appTitle = environment.appTitle
+  appDescription = environment.appDescription
 
   autenticacionService = inject(AutenticacionService)
   router = inject(Router)
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private fb: NonNullableFormBuilder
-  ) {}
+  constructor(private fb: NonNullableFormBuilder) {}
 
   ngOnInit(): void {
     this.initializeForm()
-    // this.loginForm = this.fb.group({
-    //   company: ['SCMChannel', Validators.required],
-    //   email: ['hyper@coderthemes.com', [Validators.required, Validators.email]],
-    //   password: ['Hyper', Validators.required],
-    // })
   }
 
   initializeForm(): void {
@@ -64,40 +122,30 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    try {
-      const datos = this.loginForm.getRawValue()
+    if (!this.loginForm.valid) {
+      Swal.fire({
+        title: 'Datos errados',
+        text: 'Debe ingresar el Usuario y la clave',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      })
+      return
+    }
 
-      if (!this.loginForm.valid) {
-        const recaptchaControl = this.loginForm.get('recaptchaToken')
+    const datos = this.loginForm.getRawValue()
 
+    this.autenticacionService.inicioSesion(datos).subscribe({
+      next: () => {
+        this.router.navigate(['app'])
+      },
+      error: () => {
         Swal.fire({
-          title: 'Datos errados',
-          text: 'Debe ingresar el Usuario y la clave',
+          title: 'Acceso Negado',
+          text: 'Usuario y/o contraseña incorrectos!',
           icon: 'error',
           confirmButtonText: 'Aceptar',
         })
-
-        return
-      }
-
-      this.autenticacionService.inicioSesion<ILogin>(datos).subscribe({
-        next: (data) => {
-          console.log("Login:", data);
-          this.router.navigate(['app'])
-        },
-        error: (err) => {
-          console.error(err)
-          Swal.fire({
-            title: 'Acceso Negado',
-            text: 'Usuario y/o contraseña incorrectos!',
-            icon: 'error',
-            confirmButtonText: 'Aceptar',
-          })
-        },
-      })
-    } catch (error) {
-      console.error('Error en el inicio de sesión:', error)
-      return
-    }
+      },
+    })
   }
 }

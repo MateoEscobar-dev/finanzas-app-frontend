@@ -20,7 +20,6 @@ import { NgApexchartsModule } from 'ng-apexcharts'
 import { PermissionService } from '@/app/core/service/permission.service'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import Swal from 'sweetalert2'
 import { TranslateModule } from '@ngx-translate/core'
 
 /**
@@ -70,7 +69,7 @@ export interface ITableConfig<T> {
 }
 
 // Definición de botón personalizado
-export interface CustomButton<T = any> {
+export interface CustomButton<_T = any> {
   id?: string
   label: string
   icon?: string

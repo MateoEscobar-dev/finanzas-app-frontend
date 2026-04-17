@@ -6,7 +6,6 @@ import {
   Renderer2,
   inject,
 } from '@angular/core'
-import { MENU } from '../shared/menu-meta'
 import { SimplebarAngularModule } from 'simplebar-angular'
 import { MenuItem } from '../shared/models/menu.model'
 import { NavigationEnd, Router, RouterModule } from '@angular/router'
@@ -135,7 +134,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     let matchingMenuItem = null
 
     if (div) {
-      let items: HTMLCollectionOf<HTMLAnchorElement> =
+      const items: HTMLCollectionOf<HTMLAnchorElement> =
         div.getElementsByClassName(
           'side-nav-link-ref'
         ) as HTMLCollectionOf<HTMLAnchorElement>

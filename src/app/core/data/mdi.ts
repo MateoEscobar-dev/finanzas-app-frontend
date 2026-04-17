@@ -1,4 +1,4 @@
-export type MDIIconType = {
+export interface MDIIconType {
   name: string
   hex: string
   version?: string

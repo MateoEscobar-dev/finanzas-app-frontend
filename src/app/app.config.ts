@@ -23,13 +23,11 @@ import {
 import {
   HTTP_INTERCEPTORS,
   HttpBackend,
-  HttpClient,
   provideHttpClient,
   withFetch,
   withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http'
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { provideEffects } from '@ngrx/effects'
 import { JwtInterceptor } from '@core/helpers/jwt.interceptor'
 import { ErrorInterceptor } from '@core/helpers/error.interceptor'
@@ -42,7 +40,6 @@ import {
   DEFAULT_LINK_ACTIONS_PROVIDER,
   linkActionsInitializer,
 } from './core/link-actions/link-actions.providers'
-import { LanguageService } from './core/service/language.service'
 
 // Obtener idioma inicial desde localStorage/cookie
 function getInitialLanguage(): string {
