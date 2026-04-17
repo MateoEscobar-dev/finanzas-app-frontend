@@ -31,7 +31,7 @@ export class TitleService {
     if (route.snapshot.data['title']) {
       this.titleService.setTitle(
         route.snapshot.data['title'] +
-          ' | SCMChannel Dashboard'
+          ' | FinanzasApp | Gestiona tus finanzas personales Dashboard'
       )
     }
   }

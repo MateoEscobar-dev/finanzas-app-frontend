@@ -16,7 +16,7 @@ import { Component } from '@angular/core'
                 >
               </div>
               <h2 class="text-white fw-normal mb-4 mt-3 lh-base">
-                SCMChannel Dashboard
+                FinanzasApp | Gestiona tus finanzas personales Dashboard
               </h2>
 
               <p class="mb-4 font-16 text-white-50">
