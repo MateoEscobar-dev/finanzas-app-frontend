@@ -7,7 +7,7 @@ import {
 } from './task-action'
 import { KanbanTaskItem } from '@core/model/tasks.model'
 
-export type TaskState = {
+export interface TaskState {
   kanban: KanbanTaskItem[]
 }
 

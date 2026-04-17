@@ -1,6 +1,6 @@
 import { FeedPost } from './feed.model'
 
-export type Project = {
+export interface Project {
   id: number
   clientProfile: string
   client: string

@@ -12,7 +12,7 @@ export interface ISwalConfig {
   showCancelButton?: boolean
   showConfirmButton?: boolean
   timer?: number
-  params?: { [key: string]: any }
+  params?: Record<string, any>
 }
 
 @Injectable({
@@ -67,7 +67,7 @@ export class SwalHelperService {
   confirm(
     titleKey: string,
     textKey?: string,
-    params?: { [key: string]: any }
+    params?: Record<string, any>
   ): Promise<boolean> {
     return this.show({
       titleKey,
@@ -87,7 +87,7 @@ export class SwalHelperService {
   success(
     titleKey: string,
     textKey?: string,
-    params?: { [key: string]: any }
+    params?: Record<string, any>
   ): Promise<SweetAlertResult> {
     return this.show({
       titleKey,
@@ -106,7 +106,7 @@ export class SwalHelperService {
   error(
     titleKey: string,
     textKey?: string,
-    params?: { [key: string]: any }
+    params?: Record<string, any>
   ): Promise<SweetAlertResult> {
     return this.show({
       titleKey,
@@ -125,7 +125,7 @@ export class SwalHelperService {
   warning(
     titleKey: string,
     textKey?: string,
-    params?: { [key: string]: any }
+    params?: Record<string, any>
   ): Promise<SweetAlertResult> {
     return this.show({
       titleKey,
@@ -144,7 +144,7 @@ export class SwalHelperService {
   info(
     titleKey: string,
     textKey?: string,
-    params?: { [key: string]: any }
+    params?: Record<string, any>
   ): Promise<SweetAlertResult> {
     return this.show({
       titleKey,
@@ -160,7 +160,7 @@ export class SwalHelperService {
    * @param params Parámetros para interpolación
    * @returns Texto traducido
    */
-  private translate(key: string, params?: { [key: string]: any }): string {
+  private translate(key: string, params?: Record<string, any>): string {
     return this.translateService.instant(key, params)
   }
 }

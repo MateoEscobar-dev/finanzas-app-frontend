@@ -1,9 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { LanguageService } from '@/app/core/service/language.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const languageService = inject(LanguageService);
   const token = localStorage.getItem('token');
   const lang = localStorage.getItem('lang') || 'es';
   const isFormData = req.body instanceof FormData;

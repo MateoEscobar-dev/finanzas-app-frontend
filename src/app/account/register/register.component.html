@@ -1,0 +1,210 @@
+<app-account-wrapper>
+  <!-- Header -->
+  <div class="text-center mb-4">
+    <h5 class="fw-bold text-dark mb-1">Crear cuenta</h5>
+    <p class="text-muted small mb-0">Completa los datos para registrarte en {{ appTitle }}</p>
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <!-- SECCIÓN: Identificación -->
+    <p class="section-title mt-2 mb-2">Identificación</p>
+    <div class="mb-2">
+      <label class="form-label fw-semibold small text-secondary mb-1">
+        Número de documento <span class="text-danger">*</span>
+      </label>
+      <input
+        class="form-control finance-input"
+        type="text"
+        formControlName="document"
+        placeholder="Ej. 1234567890"
+        [class.is-invalid]="isInvalid('document')"
+      />
+      @if (isInvalid('document')) {
+        <div class="invalid-feedback">Ingresa tu número de documento (mín. 4 caracteres).</div>
+      }
+    </div>
+
+    <!-- SECCIÓN: Nombres -->
+    <p class="section-title mt-3 mb-2">Nombres</p>
+    <div class="row g-2 mb-2">
+      <div class="col-6">
+        <label class="form-label fw-semibold small text-secondary mb-1">
+          Primer nombre <span class="text-danger">*</span>
+        </label>
+        <input
+          class="form-control finance-input"
+          type="text"
+          formControlName="first_name"
+          placeholder="Ej. María"
+          [class.is-invalid]="isInvalid('first_name')"
+        />
+        @if (isInvalid('first_name')) {
+          <div class="invalid-feedback">Ingresa tu primer nombre.</div>
+        }
+      </div>
+      <div class="col-6">
+        <label class="form-label fw-semibold small text-secondary mb-1">Segundo nombre</label>
+        <input
+          class="form-control finance-input"
+          type="text"
+          formControlName="second_name"
+          placeholder="Ej. Fernanda"
+        />
+      </div>
+    </div>
+
+    <!-- SECCIÓN: Apellidos -->
+    <p class="section-title mt-3 mb-2">Apellidos</p>
+    <div class="row g-2 mb-2">
+      <div class="col-6">
+        <label class="form-label fw-semibold small text-secondary mb-1">
+          Primer apellido <span class="text-danger">*</span>
+        </label>
+        <input
+          class="form-control finance-input"
+          type="text"
+          formControlName="first_last_name"
+          placeholder="Ej. García"
+          [class.is-invalid]="isInvalid('first_last_name')"
+        />
+        @if (isInvalid('first_last_name')) {
+          <div class="invalid-feedback">Ingresa tu primer apellido.</div>
+        }
+      </div>
+      <div class="col-6">
+        <label class="form-label fw-semibold small text-secondary mb-1">Segundo apellido</label>
+        <input
+          class="form-control finance-input"
+          type="text"
+          formControlName="second_last_name"
+          placeholder="Ej. López"
+        />
+      </div>
+    </div>
+
+    <!-- SECCIÓN: Contacto -->
+    <p class="section-title mt-3 mb-2">Contacto</p>
+
+    <!-- Email -->
+    <div class="mb-2">
+      <label class="form-label fw-semibold small text-secondary mb-1">
+        Correo electrónico <span class="text-danger">*</span>
+      </label>
+      <input
+        class="form-control finance-input"
+        type="email"
+        formControlName="email"
+        placeholder="Ej. usuario@correo.com"
+        autocomplete="off"
+        [class.is-invalid]="isInvalid('email')"
+      />
+      @if (isInvalid('email')) {
+        <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
+      }
+    </div>
+
+    <!-- Teléfono + Extensión -->
+    <div class="row g-2 mb-2">
+      <div class="col-8">
+        <label class="form-label fw-semibold small text-secondary mb-1">Teléfono</label>
+        <input
+          class="form-control finance-input"
+          type="tel"
+          formControlName="phone"
+          placeholder="Ej. +57 300 123 4567"
+        />
+      </div>
+      <div class="col-4">
+        <label class="form-label fw-semibold small text-secondary mb-1">Extensión</label>
+        <input
+          class="form-control finance-input"
+          type="text"
+          formControlName="phone_ext"
+          placeholder="Ej. 123"
+        />
+      </div>
+    </div>
+
+    <!-- SECCIÓN: Seguridad -->
+    <p class="section-title mt-3 mb-2">Seguridad</p>
+
+    <!-- Fecha de nacimiento -->
+    <div class="mb-2">
+      <label class="form-label fw-semibold small text-secondary mb-1">
+        Fecha de nacimiento <span class="text-danger">*</span>
+        <span class="fw-normal text-muted">(mín. 15 años)</span>
+      </label>
+      <input
+        class="form-control finance-input"
+        type="date"
+        formControlName="birth_day"
+        [max]="maxBirthDate"
+        [class.is-invalid]="isInvalid('birth_day')"
+      />
+      @if (isInvalid('birth_day')) {
+        @if (f['birth_day'].errors?.['required']) {
+          <div class="invalid-feedback">La fecha de nacimiento es obligatoria.</div>
+        } @else if (f['birth_day'].errors?.['futureDate']) {
+          <div class="invalid-feedback">La fecha no puede ser futura.</div>
+        } @else if (f['birth_day'].errors?.['underage']) {
+          <div class="invalid-feedback">Debes tener al menos 15 años cumplidos.</div>
+        } @else {
+          <div class="invalid-feedback">Fecha inválida.</div>
+        }
+      }
+    </div>
+
+    <!-- Contraseña -->
+    <div class="mb-4">
+      <label class="form-label fw-semibold small text-secondary mb-1">
+        Contraseña <span class="text-danger">*</span>
+        <span class="fw-normal text-muted">(mín. 8 caracteres)</span>
+      </label>
+      <div class="input-group">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control finance-input"
+          formControlName="password"
+          placeholder="Crea una contraseña segura"
+          autocomplete="new-password"
+          [class.is-invalid]="isInvalid('password')"
+        />
+        <button
+          class="btn btn-outline-secondary finance-toggle-btn"
+          type="button"
+          (click)="showPassword = !showPassword"
+        >
+          <i [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
+        </button>
+        @if (isInvalid('password')) {
+          <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres.</div>
+        }
+      </div>
+    </div>
+
+    <!-- Botón de registro -->
+    <div class="mb-3">
+      <button
+        class="btn btn-lg w-100 finance-btn"
+        type="submit"
+        [disabled]="isLoading"
+      >
+        @if (isLoading) {
+          <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+          Registrando...
+        } @else {
+          <i class="ri-user-add-line me-1"></i>Crear cuenta
+        }
+      </button>
+    </div>
+  </form>
+
+  <!-- Enlace a login -->
+  <div class="text-center">
+    <p class="text-muted mb-0 small">
+      ¿Ya tienes cuenta?
+      <a routerLink="/login" class="fw-semibold finance-link">Inicia sesión</a>
+    </p>
+  </div>
+</app-account-wrapper>

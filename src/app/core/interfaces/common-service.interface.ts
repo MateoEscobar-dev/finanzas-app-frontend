@@ -1,7 +1,7 @@
 import { Condicion } from "@/app/interfaces/sistema/condicion";
 import { Observable } from "rxjs";
 
-export interface ICommonService<T, TKey, TNew, TUpdate> {
+export interface ICommonService<T, TKey, _TNew, _TUpdate> {
   insert(data: T): Observable<IInsertResult<T>>;
   update(id: TKey, data: T): Observable<T>;
   delete(id: TKey): Observable<T>;

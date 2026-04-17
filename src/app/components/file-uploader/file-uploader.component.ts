@@ -4,9 +4,8 @@ import {
   DropzoneConfigInterface,
   DropzoneModule,
 } from 'ngx-dropzone-wrapper'
-import { DropzoneEvent } from 'ngx-dropzone-wrapper/lib/dropzone.interfaces'
 
-type UploadedFile = {
+interface UploadedFile {
   name: string
   size: number
   type: string
@@ -21,7 +20,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 }
 
 @Component({
-    selector: 'FileUploader',
+    selector: 'app-file-uploader',
     imports: [DropzoneModule],
     template: ` <dropzone
       class="dropzone"

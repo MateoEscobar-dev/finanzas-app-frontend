@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core'
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core'
 import JsVectorMap from 'jsvectormap'
 import { loadAllVectorMaps } from './vector-maps'
 
@@ -11,7 +11,7 @@ loadAllVectorMaps(JsVectorMap)
   template:
     '<div [id]="mapId" [style.width]="width" [style.height]="height"></div>',
 })
-export class WorldVectorMapComponent implements AfterViewInit {
+export class WorldVectorMapComponent implements AfterViewInit, OnInit {
   @Input() width: string = ''
   @Input() height: string = ''
   @Input() options: Record<string, unknown> = {}

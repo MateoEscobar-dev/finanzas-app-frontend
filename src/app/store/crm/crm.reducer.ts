@@ -8,7 +8,7 @@ import {
 } from './crm.actions'
 import { Client, Order } from '@core/model/crm.model'
 
-export type CRMState = {
+export interface CRMState {
   orders: Order[]
   client: Client[]
 }

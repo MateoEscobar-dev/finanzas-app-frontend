@@ -10,7 +10,7 @@ import {
   authenticationReducer,
 } from './authentication/authentication.reducer'
 
-export type RootReducerState = {
+export interface RootReducerState {
   authentication: AuthenticationState
   layout: LayoutState
   Calendar: CalendarState

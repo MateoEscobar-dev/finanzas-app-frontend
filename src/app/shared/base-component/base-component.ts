@@ -241,7 +241,7 @@ export abstract class baseComponent implements OnInit, OnDestroy {
           this.modalTitle = this.translateService.instant('actions.edit')
           this.openModal()
         },
-        error: (err) =>
+        error: (_err) =>
           this.showError(
             this.translateService.instant('errors.error'),
             this.translateService.instant('errors.load_record')

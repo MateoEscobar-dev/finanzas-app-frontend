@@ -1,11 +1,11 @@
-export type Person = {
+export interface Person {
   id?: number
   name?: string
   avatar?: string
   status?: string
 }
 
-export type Comment = {
+export interface Comment {
   id: number
   author: Person
   content: string
@@ -14,7 +14,7 @@ export type Comment = {
   replies?: Comment[]
 }
 
-export type FeedPost = {
+export interface FeedPost {
   id: number
   title?: string
   author: Person
@@ -29,7 +29,7 @@ export type FeedPost = {
   comments?: Comment[]
 }
 
-export type Topic = {
+export interface Topic {
   id?: number
   title?: string
   description?: string

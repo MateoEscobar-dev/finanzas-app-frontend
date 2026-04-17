@@ -8,7 +8,7 @@ import { FAQItem } from '@core/model/faq.model'
     <div class="row pt-5">
       <!-- Question/Answer -->
       @for (faq of faqList; track $index) {
-        @if ($index % 2 == 0) {
+        @if ($index % 2 === 0) {
           <div class="col-lg-5 offset-lg-1">
             <div>
               <div class="faq-question-q-box">Q.</div>

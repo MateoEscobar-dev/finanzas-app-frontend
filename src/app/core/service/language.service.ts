@@ -27,7 +27,7 @@ export class LanguageService {
     localStorage.setItem('lang', lang)
   }
 
-  private languageMap: { [key: string]: number } = {
+  private languageMap: Record<string, number> = {
     sp: 1,
     es: 1,
     en: 2,
@@ -37,7 +37,7 @@ export class LanguageService {
     fr: 6,
   }
 
-  private languageMapData: { [key: string]: { key: string; value: number } } = {
+  private languageMapData: Record<string, { key: string; value: number }> = {
     sp: { key: 'es-ES', value: 1 },
     es: { key: 'es-ES', value: 1 },
     en: { key: 'en-US', value: 2 },

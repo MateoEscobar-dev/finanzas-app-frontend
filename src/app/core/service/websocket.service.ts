@@ -1,7 +1,6 @@
-import { Injectable, inject } from '@angular/core'
-import { Observable, Subject, timer } from 'rxjs'
+import { Injectable } from '@angular/core'
+import { Observable, Subject } from 'rxjs'
 import { filter, takeUntil } from 'rxjs/operators'
-import { environment } from '@/environments/environment'
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 
@@ -21,7 +20,7 @@ export interface IWebSocketMessage {
 })
 export class WebSocketService {
   private echo?: Echo<any>
-  private channels: Map<string, any> = new Map()
+  private channels = new Map<string, any>()
   private destroy$ = new Subject<void>()
 
   // Subject para mensajes entrantes
@@ -67,12 +66,12 @@ export class WebSocketService {
       // console.log('❌ Laravel Reverb DESCONECTADO')
     })
 
-    pusherInstance.connection.bind('error', (error: any) => {
-      // console.error('⚠️ ERROR en Laravel Reverb:', error)
+    pusherInstance.connection.bind('error', (_error: any) => {
+      // console.error('⚠️ ERROR en Laravel Reverb:', _error)
     })
 
-    pusherInstance.connection.bind('state_change', (states: any) => {
-      // console.log(`🔄 Estado cambió: ${states.previous} -> ${states.current}`)
+    pusherInstance.connection.bind('state_change', (_states: any) => {
+      // console.log(`🔄 Estado cambió: ${_states.previous} -> ${_states.current}`)
     })
   }
 
@@ -87,7 +86,7 @@ export class WebSocketService {
         type: message.type,
         operationId: message.operationId,
         message: message.message || '',
-        timestamp: new Date(message.timestamp) || new Date(),
+        timestamp: message.timestamp ? new Date(message.timestamp) : new Date(),
         data: message.data,
       }
       // console.log('✔️ Mensaje validado y enviado:', wsMessage)
@@ -102,7 +101,7 @@ export class WebSocketService {
    */
   subscribeToOperation(
     operationId: string,
-    eventName: string = 'update'
+    _eventName: string = 'update'
   ): void {
     // console.log(`📌 Suscribiendo a canal: server-actions.${operationId}`)
 
@@ -178,7 +177,7 @@ export class WebSocketService {
    * Envía un mensaje al WebSocket (Laravel Reverb usa eventos del servidor)
    * Para enviar datos, usa una API REST o broadcasting desde el servidor
    */
-  send(message: any): void {
+  send(_message: any): void {
     // console.warn(
     //   '⚠️ Laravel Reverb recibe eventos del servidor, no envía mensajes directos desde el cliente'
     // )

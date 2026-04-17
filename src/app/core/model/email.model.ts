@@ -1,4 +1,4 @@
-export type Email = {
+export interface Email {
   id: number
   from_name: string
   from_email: string
@@ -10,7 +10,7 @@ export type Email = {
   date: string
 }
 
-export type EmailDetails = {
+export interface EmailDetails {
   avatar: string
   subject: string
   from_name: string

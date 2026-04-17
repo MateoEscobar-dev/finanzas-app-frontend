@@ -12,7 +12,7 @@ export class ApiService {
 
   private getHeaders(): HttpHeaders {
     //const token = localStorage.getItem('authToken');
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // if (token) {
     //   headers = headers.set('Authorization', `Bearer ${token}`);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { SimplebarAngularModule } from 'simplebar-angular'
 import { StatisticsComponent } from './components/statistics.component'
 import { ProjectionsComponent } from './components/projections.component'
@@ -104,7 +104,7 @@ import { FormsModule } from '@angular/forms'
     <!-- end row -->`,
     styles: ``
 })
-export class IndexComponent {
+export class IndexComponent implements OnInit {
   date: NgbDateStruct = {
     year: 2024,
     month: 3,

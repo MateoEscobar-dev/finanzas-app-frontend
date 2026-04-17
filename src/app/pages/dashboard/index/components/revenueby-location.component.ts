@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { CardTitleComponent } from '@component/card-title.component'
 import { NgApexchartsModule } from 'ng-apexcharts'
 import { WorldVectorMapComponent } from '@component/vector-maps/world-vector-map.component'
@@ -97,7 +97,7 @@ import "jsvectormap/dist/maps/world"
     <!-- end card-->`,
     styles: ``
 })
-export class RevenueByLocationComponent {
+export class RevenueByLocationComponent implements OnInit {
   worldMapConfig = {
     selector: '#world-map-markers',
     backgroundColor: 'transparent',

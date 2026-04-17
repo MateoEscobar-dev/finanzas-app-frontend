@@ -18,8 +18,7 @@ const posts: FeedPost[] = [
     },
     postedOn: 'about 2 minuts ago',
     scope: 'Public',
-    // tslint:disable-next-line: max-line-length
-    content:
+       content:
       '<div class="font-16 text-center text-dark my-3"><i class="mdi mdi-format-quote-open font-20"></i> Leave one wolf alive and the sheep are never safe. When people ask you what happened here, tell them the North remembers. Tell them winter came for House Frey.</div>',
     totalLikes: '2k',
     totalComments: '200',
@@ -60,8 +59,7 @@ const posts: FeedPost[] = [
     },
     postedOn: 'about 20 minuts ago',
     scope: 'Public',
-    // tslint:disable-next-line: max-line-length
-    content:
+       content:
       '<div class="my-3"><p>"Feeling awesome at the wall!"</p><div class="row"><div class="col-sm-8">' +
       '<img src="' +
       img1 +

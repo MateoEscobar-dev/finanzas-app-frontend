@@ -1,4 +1,4 @@
-import { Component, HostListener, Renderer2, inject } from '@angular/core'
+import { Component, HostListener, Renderer2, inject, OnInit } from '@angular/core'
 import { SidebarComponent } from '../sidebar/sidebar.component'
 import { TopbarComponent } from '../topbar/topbar.component'
 import { FooterComponent } from '../footer/footer.component'
@@ -42,7 +42,7 @@ import { getSidebarsize } from '@store/layout/layout-selector'
     styles: ``,
     providers: [NgbActiveOffcanvas]
 })
-export class VerticalComponent {
+export class VerticalComponent implements OnInit {
   private offcanvasService = inject(NgbOffcanvas)
   private store = inject(Store)
   private render = inject(Renderer2)

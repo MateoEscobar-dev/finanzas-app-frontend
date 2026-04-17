@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ChartType, NgApexchartsModule } from 'ng-apexcharts'
 import { CardTitleComponent } from '@component/card-title.component'
 import { ChartOptions } from '@core/model/apexchart.model'
@@ -47,7 +47,7 @@ import { ChartOptions } from '@core/model/apexchart.model'
   `,
     styles: ``
 })
-export class ProjectionsComponent {
+export class ProjectionsComponent implements OnInit {
   ngOnInit(): void {}
 
   highperformingproduct: Partial<ChartOptions> = {

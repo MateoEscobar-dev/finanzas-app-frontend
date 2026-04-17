@@ -1,13 +1,13 @@
-export type QuickAccessItem = {
+export interface QuickAccessItem {
   icon: string
   name: string
   size: string
 }
-type Member = {
+interface Member {
   image: string
   name: string
 }
-export type RecentFileItem = {
+export interface RecentFileItem {
   name: string
   modifiedDate: string
   modifiedBy: string

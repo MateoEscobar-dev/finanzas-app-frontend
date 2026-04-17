@@ -17,7 +17,7 @@ import { PermissionService } from '@/app/core/service/permission.service'
   selector: 'app-users-list',
   template: `...`,
 })
-export class UsersListComponent {
+export class UsersListComponent implements OnInit {
   permissionService = inject(PermissionService)
 
   ngOnInit() {
@@ -116,7 +116,7 @@ import { PermissionService } from '@/app/core/service/permission.service'
 export class UsersApiService {
   private permissionService = inject(PermissionService)
 
-  addUser(userData: any) {
+  addUser(_userData: any) {
     // Verificar permiso antes de hacer la petición
     if (!this.permissionService.hasPermission('users.add')) {
       throw new Error('No tiene permiso para agregar usuarios')
@@ -126,7 +126,7 @@ export class UsersApiService {
     // return this.http.post('/api/users', userData)
   }
 
-  deleteUser(userId: number) {
+  deleteUser(_userId: number) {
     if (!this.permissionService.canPerformAction('users.destroy')) {
       throw new Error('No tiene permiso para eliminar usuarios')
     }
@@ -143,7 +143,7 @@ import { Injectable, inject } from '@angular/core'
 import { CanActivateFn, Router } from '@angular/router'
 import { PermissionService } from '@/app/core/service/permission.service'
 
-export const hasPermissionGuard: CanActivateFn = (route, state) => {
+export const hasPermissionGuard: CanActivateFn = (route, _state) => {
   const permissionService = inject(PermissionService)
   const router = inject(Router)
 
@@ -206,7 +206,7 @@ export class MyComponent {
 // ============================================
 
 import { HttpInterceptorFn } from '@angular/common/http'
-import { inject } from '@angular/core'
+import { inject, OnInit } from '@angular/core'
 import { PermissionService } from '@/app/core/service/permission.service'
 
 export const loggingInterceptor: HttpInterceptorFn = (req, next) => {

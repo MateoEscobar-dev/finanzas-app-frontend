@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, ContentChild, TemplateRef } from '@angular/core'
 import { RouterModule } from '@angular/router'
-import { BgCirclesComponent } from '@component/bg-circles/bg-circles.component'
 
 @Component({
     selector: 'app-account-wrapper2',

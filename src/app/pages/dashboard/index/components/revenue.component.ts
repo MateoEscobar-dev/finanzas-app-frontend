@@ -98,7 +98,7 @@ export class RevenueComponent {
       enabled: false,
     },
     stroke: {
-      curve: 'smooth' as 'smooth',
+      curve: 'smooth' as const,
       width: 4,
     },
     series: [

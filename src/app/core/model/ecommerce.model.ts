@@ -1,6 +1,4 @@
-import { ChartOptions } from './apexchart.model'
-
-export type product = {
+export interface product {
   id: number
   name: string
   category: string
@@ -12,7 +10,7 @@ export type product = {
   status: boolean
 }
 
-export type Orders = {
+export interface Orders {
   id: number
   order_id: string
   order_date: string
@@ -24,7 +22,7 @@ export type Orders = {
   order_status: string
 }
 
-export type Customer = {
+export interface Customer {
   id: number
   name: string
   email: string
@@ -35,7 +33,7 @@ export type Customer = {
   avatar: string
 }
 
-export type Seller = {
+export interface Seller {
   id: number
   name: string
   store: string
@@ -46,7 +44,7 @@ export type Seller = {
   chart?: any
 }
 
-export type OrderItem = {
+export interface OrderItem {
   id: number
   name: string
   quantity: number
@@ -54,7 +52,7 @@ export type OrderItem = {
   total: string
 }
 
-export type ShippingAddress = {
+export interface ShippingAddress {
   provider: string
   address_1: string
   address_2: string
@@ -62,19 +60,19 @@ export type ShippingAddress = {
   mobile: string
 }
 
-export type Billing = {
+export interface Billing {
   type: string
   provider: string
   valid: string
 }
 
-export type DeliveryInfoItem = {
+export interface DeliveryInfoItem {
   provider: string
   order_id: string
   payment_mode: string
 }
 
-export type OrderDetailsItem = {
+export interface OrderDetailsItem {
   id: string
   order_status?: string
   items: OrderItem[]
@@ -87,7 +85,7 @@ export type OrderDetailsItem = {
   delivery: DeliveryInfoItem
 }
 
-export type CartItem = {
+export interface CartItem {
   id: number
   image: string
   name: string
@@ -98,7 +96,7 @@ export type CartItem = {
   total: number
 }
 
-export type CartSummaryItem = {
+export interface CartSummaryItem {
   gross_total: number
   discount: number
   shipping_charge: number

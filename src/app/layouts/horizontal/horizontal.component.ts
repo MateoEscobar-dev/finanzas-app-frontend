@@ -1,4 +1,4 @@
-import { Component, Renderer2, inject } from '@angular/core'
+import { Component, Renderer2, inject, OnInit } from '@angular/core'
 import { TopbarComponent } from '../topbar/topbar.component'
 import { RouterModule } from '@angular/router'
 import { FooterComponent } from '../footer/footer.component'
@@ -38,7 +38,7 @@ import { RightSidebarComponent } from '../right-sidebar/right-sidebar.component'
   `,
     styles: ``
 })
-export class HorizontalComponent {
+export class HorizontalComponent implements OnInit {
   private offcanvasService = inject(NgbOffcanvas)
   private render = inject(Renderer2)
 

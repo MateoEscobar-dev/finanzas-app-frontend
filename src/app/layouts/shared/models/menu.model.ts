@@ -1,4 +1,4 @@
-export type MenuItem = {
+export interface MenuItem {
   id?: number
   key?: string
   label?: string

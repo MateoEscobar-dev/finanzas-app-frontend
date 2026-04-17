@@ -91,13 +91,13 @@ export class AutenticacionService {
     }
   }
 
-  inicioSesion<T>(login: ILogin): Observable<IAuthResponse> {
-    const claveCifrada = this.cryptoService.encrypt(
+  inicioSesion(login: ILogin): Observable<IAuthResponse> {
+    const _claveCifrada = this.cryptoService.encrypt(
       login.password,
       this.secretKey
     )
 
-    let datosLoginEncrypt: ILogin = login
+    const datosLoginEncrypt: ILogin = login
     //datosLoginEncrypt.password = claveCifrada
     datosLoginEncrypt.password = login.password
     return this.http
@@ -142,7 +142,7 @@ export class AutenticacionService {
       )
   }
 
-  registrarUsuario<T>(
+  registrarUsuario(
     datosUsuario: IRegistroUsuarioControl
   ): Observable<IRegistroUsuarioControl> {
     const claveCifrada = this.cryptoService.encrypt(
@@ -150,7 +150,7 @@ export class AutenticacionService {
       this.secretKey
     )
 
-    let datosUsuarioEncrypt: IRegistroUsuarioControl = datosUsuario
+    const datosUsuarioEncrypt: IRegistroUsuarioControl = datosUsuario
     datosUsuarioEncrypt.password = claveCifrada
 
     return this.http

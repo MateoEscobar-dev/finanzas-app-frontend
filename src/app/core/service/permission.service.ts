@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { AutenticacionService } from '@/app/services/autenticacion/autenticacion.service'
 import { IUser } from '@/app/interfaces/autenticacion/auth-response.interface'
 

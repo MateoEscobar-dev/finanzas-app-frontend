@@ -1,4 +1,4 @@
-import { Component, HostListener, Renderer2, inject } from '@angular/core'
+import { Component, Renderer2, inject, OnInit } from '@angular/core'
 import { HorizontalComponent } from '../horizontal/horizontal.component'
 import { VerticalComponent } from '../vertical/vertical.component'
 import { Store } from '@ngrx/store'
@@ -16,7 +16,7 @@ import { Store } from '@ngrx/store'
   `,
     styles: ``
 })
-export class PrivateLayoutComponent {
+export class PrivateLayoutComponent implements OnInit {
   layoutType: string = ''
 
   private store = inject(Store)

@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store'
 import { fetchProjectList, fetchProjectListSuccess } from './project-action'
 import { Project } from '@core/model/project.model'
 
-export type ProjectState = {
+export interface ProjectState {
   projects: Project[]
 }
 

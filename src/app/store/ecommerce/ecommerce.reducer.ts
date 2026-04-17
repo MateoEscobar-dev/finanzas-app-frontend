@@ -11,7 +11,7 @@ import {
 } from './ecommerce.actions'
 import { Customer, Orders, Seller, product } from '@core/model/ecommerce.model'
 
-export type EcommerceState = {
+export interface EcommerceState {
   products: product[]
   orders: Orders[]
   customers: Customer[]

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-export type LinkActionContext = {
+export interface LinkActionContext {
   field: string,
   value: any,
   display?: string,
@@ -12,7 +12,7 @@ export type LinkActionContext = {
   idMovimientoEnlace?: number;
   searchSvc?: any;
   translationService?: any;
-};
+}
 
 type Handler = (ctx: LinkActionContext) => void | Promise<void>;
 
