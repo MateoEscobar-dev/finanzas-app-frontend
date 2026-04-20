@@ -92,14 +92,13 @@ export class AutenticacionService {
   }
 
   inicioSesion(login: ILogin): Observable<IAuthResponse> {
-    const _claveCifrada = this.cryptoService.encrypt(
+    const claveCifrada = this.cryptoService.encrypt(
       login.password,
       this.secretKey
     )
 
-    const datosLoginEncrypt: ILogin = login
-    //datosLoginEncrypt.password = claveCifrada
-    datosLoginEncrypt.password = login.password
+    const datosLoginEncrypt: ILogin = { ...login }
+    datosLoginEncrypt.password = claveCifrada
     return this.http
       .post<IAuthResponse>(this.apiUrl, datosLoginEncrypt, {
         headers: this.getHeaders(),
@@ -150,7 +149,7 @@ export class AutenticacionService {
       this.secretKey
     )
 
-    const datosUsuarioEncrypt: IRegistroUsuarioControl = datosUsuario
+    const datosUsuarioEncrypt: IRegistroUsuarioControl = { ...datosUsuario }
     datosUsuarioEncrypt.password = claveCifrada
 
     return this.http

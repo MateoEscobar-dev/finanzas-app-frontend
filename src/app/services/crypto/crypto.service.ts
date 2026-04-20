@@ -32,12 +32,12 @@ export class CryptoService {
       ciphertext: encrypted.ciphertext.toString(CryptoJS.enc.Base64),
     }
 
-    return btoa(JSON.stringify(result)) // Codificamos todo como base64 para fácil transmisión
+    return JSON.stringify(result)
   }
 
   // 🔓 Desencriptar texto
-  decrypt(encryptedBase64: string, passphrase: string): string {
-    const decoded = JSON.parse(atob(encryptedBase64))
+  decrypt(encryptedJson: string, passphrase: string): string {
+    const decoded = JSON.parse(encryptedJson)
 
     const salt = CryptoJS.enc.Hex.parse(decoded.salt)
     const iv = CryptoJS.enc.Hex.parse(decoded.iv)
