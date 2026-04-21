@@ -1,5 +1,7 @@
 import { IRegistroUsuarioControl } from '@/app/interfaces/autenticacion/registro.interface'
 import { IAuthResponse, ISessionData } from '@/app/interfaces/autenticacion/auth-response.interface'
+import { IForgotPassword, IResetPassword } from '@/app/interfaces/autenticacion/forgot-password.interface'
+import { ITwoFactor } from '@/app/interfaces/autenticacion/two-factor.interface'
 import { environment } from '@/environments/environment'
 import {
   HttpClient,
@@ -19,6 +21,9 @@ export class AutenticacionService {
   private urlserver: string = environment.apiUrl
   private apiUrl: string = `${this.urlserver}/login`
   private apiUrlRegister: string = `${this.urlserver}/register`
+  private apiUrlForgotPassword: string = `${this.urlserver}/forgot-password`
+  private apiUrlResetPassword: string = `${this.urlserver}/reset-password`
+  private apiUrl2FA: string = `${this.urlserver}/2fa/verify`
 
   private secretKey: string = environment.encryptSecret
 
@@ -157,6 +162,54 @@ export class AutenticacionService {
         headers: this.getHeaders(),
       })
       .pipe(catchError(this.handleError))
+  }
+
+  recuperarContrasena(data: IForgotPassword): Observable<any> {
+    return this.http
+      .post(`${this.apiUrlForgotPassword}`, data, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError))
+  }
+
+  restablecerContrasena(data: IResetPassword): Observable<any> {
+    const claveCifrada = this.cryptoService.encrypt(data.password, this.secretKey)
+    const payload: IResetPassword = { ...data, password: claveCifrada }
+    return this.http
+      .post(`${this.apiUrlResetPassword}`, payload, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError))
+  }
+
+  verificar2FA(data: ITwoFactor): Observable<IAuthResponse> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.token}`,
+    })
+    return this.http
+      .post<IAuthResponse>(`${this.apiUrl2FA}`, data, { headers })
+      .pipe(
+        tap((response: IAuthResponse) => {
+          const authData = response.data
+          const user = authData.user
+          const sessionData: ISessionData = {
+            token: authData.token,
+            token_type: authData.token_type,
+            user: user,
+            permissions: user.permissions,
+            roles: user.roles,
+            abilities: authData.abilities,
+          }
+          localStorage.setItem('token', authData.token)
+          localStorage.setItem('tokenType', authData.token_type)
+          localStorage.setItem('currentUser', JSON.stringify(user))
+          localStorage.setItem('sessionData', JSON.stringify(sessionData))
+          localStorage.setItem('permissions', JSON.stringify(user.permissions))
+          localStorage.setItem('roles', JSON.stringify(user.roles))
+          localStorage.setItem('abilities', JSON.stringify(authData.abilities))
+          if (user.lang) localStorage.setItem('lang', user.lang)
+          this.currentUserSubject.next(user)
+          this.sessionDataSubject.next(sessionData)
+        }),
+        catchError(this.handleError)
+      )
   }
 
   logout(): Observable<any> {
