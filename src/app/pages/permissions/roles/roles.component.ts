@@ -134,7 +134,7 @@ export class RolesComponent extends baseComponent {
         action: 'role_permissions',
         label: 'labels.role_permissions',
         icon: 'mdi mdi-shield-key',
-        class: 'btn-info',
+        class: 'btn-primary',
         permission: `${this.modulePermission}.view`,
       },
     ]
