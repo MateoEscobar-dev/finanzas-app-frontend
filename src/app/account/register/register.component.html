@@ -1,139 +1,139 @@
 <app-account-wrapper>
   <!-- Header -->
   <div class="text-center mb-4">
-    <h5 class="fw-bold text-dark mb-1">Crear cuenta</h5>
-    <p class="text-muted small mb-0">Completa los datos para registrarte en {{ appTitle }}</p>
+    <h5 class="fw-bold text-dark mb-1">{{ 'auth.register.title' | translate }}</h5>
+    <p class="text-muted small mb-0">{{ 'auth.register.subtitle' | translate: {appTitle: appTitle} }}</p>
   </div>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
 
     <!-- SECCIÓN: Identificación -->
-    <p class="section-title mt-2 mb-2">Identificación</p>
+    <p class="section-title mt-2 mb-2">{{ 'auth.register.section_identification' | translate }}</p>
     <div class="mb-2">
       <label class="form-label fw-semibold small text-secondary mb-1">
-        Número de documento <span class="text-danger">*</span>
+        {{ 'auth.register.document_label' | translate }} <span class="text-danger">*</span>
       </label>
       <input
         class="form-control finance-input"
         type="text"
         formControlName="document"
-        placeholder="Ej. 1234567890"
+        [placeholder]="'auth.register.document_placeholder' | translate"
         [class.is-invalid]="isInvalid('document')"
       />
       @if (isInvalid('document')) {
-        <div class="invalid-feedback">Ingresa tu número de documento (mín. 4 caracteres).</div>
+        <div class="invalid-feedback">{{ 'auth.register.document_error' | translate }}</div>
       }
     </div>
 
     <!-- SECCIÓN: Nombres -->
-    <p class="section-title mt-3 mb-2">Nombres</p>
+    <p class="section-title mt-3 mb-2">{{ 'auth.register.section_names' | translate }}</p>
     <div class="row g-2 mb-2">
       <div class="col-6">
         <label class="form-label fw-semibold small text-secondary mb-1">
-          Primer nombre <span class="text-danger">*</span>
+          {{ 'auth.register.first_name_label' | translate }} <span class="text-danger">*</span>
         </label>
         <input
           class="form-control finance-input"
           type="text"
           formControlName="first_name"
-          placeholder="Ej. María"
+          [placeholder]="'auth.register.first_name_placeholder' | translate"
           [class.is-invalid]="isInvalid('first_name')"
         />
         @if (isInvalid('first_name')) {
-          <div class="invalid-feedback">Ingresa tu primer nombre.</div>
+          <div class="invalid-feedback">{{ 'auth.register.first_name_error' | translate }}</div>
         }
       </div>
       <div class="col-6">
-        <label class="form-label fw-semibold small text-secondary mb-1">Segundo nombre</label>
+        <label class="form-label fw-semibold small text-secondary mb-1">{{ 'auth.register.second_name_label' | translate }}</label>
         <input
           class="form-control finance-input"
           type="text"
           formControlName="second_name"
-          placeholder="Ej. Fernanda"
+          [placeholder]="'auth.register.second_name_placeholder' | translate"
         />
       </div>
     </div>
 
     <!-- SECCIÓN: Apellidos -->
-    <p class="section-title mt-3 mb-2">Apellidos</p>
+    <p class="section-title mt-3 mb-2">{{ 'auth.register.section_last_names' | translate }}</p>
     <div class="row g-2 mb-2">
       <div class="col-6">
         <label class="form-label fw-semibold small text-secondary mb-1">
-          Primer apellido <span class="text-danger">*</span>
+          {{ 'auth.register.first_last_name_label' | translate }} <span class="text-danger">*</span>
         </label>
         <input
           class="form-control finance-input"
           type="text"
           formControlName="first_last_name"
-          placeholder="Ej. García"
+          [placeholder]="'auth.register.first_last_name_placeholder' | translate"
           [class.is-invalid]="isInvalid('first_last_name')"
         />
         @if (isInvalid('first_last_name')) {
-          <div class="invalid-feedback">Ingresa tu primer apellido.</div>
+          <div class="invalid-feedback">{{ 'auth.register.first_last_name_error' | translate }}</div>
         }
       </div>
       <div class="col-6">
-        <label class="form-label fw-semibold small text-secondary mb-1">Segundo apellido</label>
+        <label class="form-label fw-semibold small text-secondary mb-1">{{ 'auth.register.second_last_name_label' | translate }}</label>
         <input
           class="form-control finance-input"
           type="text"
           formControlName="second_last_name"
-          placeholder="Ej. López"
+          [placeholder]="'auth.register.second_last_name_placeholder' | translate"
         />
       </div>
     </div>
 
     <!-- SECCIÓN: Contacto -->
-    <p class="section-title mt-3 mb-2">Contacto</p>
+    <p class="section-title mt-3 mb-2">{{ 'auth.register.section_contact' | translate }}</p>
 
     <!-- Email -->
     <div class="mb-2">
       <label class="form-label fw-semibold small text-secondary mb-1">
-        Correo electrónico <span class="text-danger">*</span>
+        {{ 'auth.register.email_label' | translate }} <span class="text-danger">*</span>
       </label>
       <input
         class="form-control finance-input"
         type="email"
         formControlName="email"
-        placeholder="Ej. usuario@correo.com"
+        [placeholder]="'auth.register.email_placeholder' | translate"
         autocomplete="off"
         [class.is-invalid]="isInvalid('email')"
       />
       @if (isInvalid('email')) {
-        <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
+        <div class="invalid-feedback">{{ 'auth.register.email_error' | translate }}</div>
       }
     </div>
 
     <!-- Teléfono + Extensión -->
     <div class="row g-2 mb-2">
       <div class="col-8">
-        <label class="form-label fw-semibold small text-secondary mb-1">Teléfono</label>
+        <label class="form-label fw-semibold small text-secondary mb-1">{{ 'auth.register.phone_label' | translate }}</label>
         <input
           class="form-control finance-input"
           type="tel"
           formControlName="phone"
-          placeholder="Ej. +57 300 123 4567"
+          [placeholder]="'auth.register.phone_placeholder' | translate"
         />
       </div>
       <div class="col-4">
-        <label class="form-label fw-semibold small text-secondary mb-1">Extensión</label>
+        <label class="form-label fw-semibold small text-secondary mb-1">{{ 'auth.register.phone_ext_label' | translate }}</label>
         <input
           class="form-control finance-input"
           type="text"
           formControlName="phone_ext"
-          placeholder="Ej. 123"
+          [placeholder]="'auth.register.phone_ext_placeholder' | translate"
         />
       </div>
     </div>
 
     <!-- SECCIÓN: Seguridad -->
-    <p class="section-title mt-3 mb-2">Seguridad</p>
+    <p class="section-title mt-3 mb-2">{{ 'auth.register.section_security' | translate }}</p>
 
     <!-- Fecha de nacimiento -->
     <div class="mb-2">
       <label class="form-label fw-semibold small text-secondary mb-1">
-        Fecha de nacimiento <span class="text-danger">*</span>
-        <span class="fw-normal text-muted">(mín. 15 años)</span>
+        {{ 'auth.register.birth_day_label' | translate }} <span class="text-danger">*</span>
+        <span class="fw-normal text-muted">{{ 'auth.register.birth_day_min_age' | translate }}</span>
       </label>
       <input
         class="form-control finance-input"
@@ -144,13 +144,13 @@
       />
       @if (isInvalid('birth_day')) {
         @if (f['birth_day'].errors?.['required']) {
-          <div class="invalid-feedback">La fecha de nacimiento es obligatoria.</div>
+          <div class="invalid-feedback">{{ 'auth.register.birth_day_error_required' | translate }}</div>
         } @else if (f['birth_day'].errors?.['futureDate']) {
-          <div class="invalid-feedback">La fecha no puede ser futura.</div>
+          <div class="invalid-feedback">{{ 'auth.register.birth_day_error_future' | translate }}</div>
         } @else if (f['birth_day'].errors?.['underage']) {
-          <div class="invalid-feedback">Debes tener al menos 15 años cumplidos.</div>
+          <div class="invalid-feedback">{{ 'auth.register.birth_day_error_underage' | translate }}</div>
         } @else {
-          <div class="invalid-feedback">Fecha inválida.</div>
+          <div class="invalid-feedback">{{ 'auth.register.birth_day_error_invalid' | translate }}</div>
         }
       }
     </div>
@@ -158,15 +158,15 @@
     <!-- Contraseña -->
     <div class="mb-4">
       <label class="form-label fw-semibold small text-secondary mb-1">
-        Contraseña <span class="text-danger">*</span>
-        <span class="fw-normal text-muted">(mín. 8 caracteres)</span>
+        {{ 'auth.register.password_label' | translate }} <span class="text-danger">*</span>
+        <span class="fw-normal text-muted">{{ 'auth.register.password_min_chars' | translate }}</span>
       </label>
       <div class="input-group">
         <input
           [type]="showPassword ? 'text' : 'password'"
           class="form-control finance-input"
           formControlName="password"
-          placeholder="Crea una contraseña segura"
+          [placeholder]="'auth.register.password_placeholder' | translate"
           autocomplete="new-password"
           [class.is-invalid]="isInvalid('password')"
         />
@@ -178,7 +178,7 @@
           <i [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
         </button>
         @if (isInvalid('password')) {
-          <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres.</div>
+          <div class="invalid-feedback">{{ 'auth.register.password_error' | translate }}</div>
         }
       </div>
     </div>
@@ -192,9 +192,9 @@
       >
         @if (isLoading) {
           <span class="spinner-border spinner-border-sm me-1" role="status"></span>
-          Registrando...
+          {{ 'auth.register.registering' | translate }}
         } @else {
-          <i class="ri-user-add-line me-1"></i>Crear cuenta
+          <i class="ri-user-add-line me-1"></i>{{ 'auth.register.submit' | translate }}
         }
       </button>
     </div>
@@ -203,8 +203,8 @@
   <!-- Enlace a login -->
   <div class="text-center">
     <p class="text-muted mb-0 small">
-      ¿Ya tienes cuenta?
-      <a routerLink="/login" class="fw-semibold finance-link">Inicia sesión</a>
+      {{ 'auth.register.have_account' | translate }}
+      <a routerLink="/login" class="fw-semibold finance-link">{{ 'auth.register.login_link' | translate }}</a>
     </p>
   </div>
 </app-account-wrapper>

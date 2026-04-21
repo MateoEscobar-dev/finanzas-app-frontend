@@ -13,6 +13,7 @@ import {
 import { Component, inject, OnInit } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { AccountWrapperComponent } from '@auth/account-wrapper.component'
+import { TranslateModule } from '@ngx-translate/core'
 import Swal from 'sweetalert2'
 
 function passwordMatchValidator(): ValidatorFn {
@@ -33,6 +34,7 @@ function passwordMatchValidator(): ValidatorFn {
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   templateUrl: './reset-password.component.html',
   styles: `

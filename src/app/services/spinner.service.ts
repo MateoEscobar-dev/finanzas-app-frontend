@@ -8,7 +8,7 @@ export class SpinnerService {
 
   constructor(private dialog: MatDialog) { }
 
-  showByComponents(showMessage: boolean, showTitle: boolean, title = 'loading-title', message = 'loading-message'): void {
+  showByComponents(showMessage: boolean, showTitle: boolean, title = 'common.loading.title', message = 'common.loading.message'): void {
     if (!this.dialogRef) {
       const config = new MatDialogConfig();
       config.disableClose = true;
@@ -21,7 +21,7 @@ export class SpinnerService {
       this.dialogRef = this.dialog.open(SpinnerComponent, config);
     }
   }
-  show(title = 'loading-title', message = 'loading-message'): void {
+  show(title = 'common.loading.title', message = 'common.loading.message'): void {
     if (!this.dialogRef) {
       const config = new MatDialogConfig();
       config.disableClose = true;

@@ -11,31 +11,31 @@
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
     <!-- Usuario o Correo -->
     <div class="mb-3">
-      <label for="emailaddress" class="form-label fw-semibold text-secondary small">Usuario o correo</label>
+      <label for="emailaddress" class="form-label fw-semibold text-secondary small">{{ 'auth.login.email_label' | translate }}</label>
       <input
         class="form-control form-control-lg finance-input"
         type="text"
         id="emailaddress"
         formControlName="email"
-        placeholder="Ej. usuario&#64;correo.com"
+        [placeholder]="'auth.login.email_placeholder' | translate"
         autocomplete="off"
         [class.is-invalid]="isInvalid('email')"
       />
       @if (isInvalid('email')) {
-        <div class="invalid-feedback">Ingresa tu usuario o correo.</div>
+        <div class="invalid-feedback">{{ 'auth.login.email_error' | translate }}</div>
       }
     </div>
 
     <!-- Contraseña -->
     <div class="mb-3">
-      <label for="password" class="form-label fw-semibold text-secondary small">Contraseña</label>
+      <label for="password" class="form-label fw-semibold text-secondary small">{{ 'auth.login.password_label' | translate }}</label>
       <div class="input-group">
         <input
           [type]="showPassword ? 'text' : 'password'"
           id="password"
           class="form-control form-control-lg finance-input"
           formControlName="password"
-          placeholder="Ingresa tu contraseña"
+          [placeholder]="'auth.login.password_placeholder' | translate"
           autocomplete="off"
           [class.is-invalid]="isInvalid('password')"
         />
@@ -47,7 +47,7 @@
           <i [class]="showPassword ? 'ri-eye-off-line' : 'ri-eye-line'"></i>
         </button>
         @if (isInvalid('password')) {
-          <div class="invalid-feedback">Ingresa tu contraseña.</div>
+          <div class="invalid-feedback">{{ 'auth.login.password_error' | translate }}</div>
         }
       </div>
     </div>
@@ -56,9 +56,9 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
       <div class="form-check">
         <input type="checkbox" class="form-check-input" id="checkbox-signin" />
-        <label class="form-check-label text-muted small" for="checkbox-signin">Recordarme</label>
+        <label class="form-check-label text-muted small" for="checkbox-signin">{{ 'auth.login.remember_me' | translate }}</label>
       </div>
-      <a routerLink="/forgot-password" class="finance-link small">¿Olvidaste tu contraseña?</a>
+      <a routerLink="/forgot-password" class="finance-link small">{{ 'auth.login.forgot_password' | translate }}</a>
     </div>
 
     <!-- Botón de inicio -->
@@ -66,9 +66,9 @@
       <button class="btn btn-lg w-100 finance-btn" type="submit" [disabled]="isLoading">
         @if (isLoading) {
           <span class="spinner-border spinner-border-sm me-1" role="status"></span>
-          Verificando...
+          {{ 'auth.login.verifying' | translate }}
         } @else {
-          <i class="ri-login-box-line me-1"></i>Iniciar sesión
+          <i class="ri-login-box-line me-1"></i>{{ 'auth.login.submit' | translate }}
         }
       </button>
     </div>
@@ -77,8 +77,8 @@
   <!-- Separador -->
   <div class="text-center mt-3">
     <p class="text-muted mb-0 small">
-      ¿No tienes cuenta?
-      <a routerLink="/register" class="fw-semibold finance-link">Regístrate</a>
+      {{ 'auth.login.no_account' | translate }}
+      <a routerLink="/register" class="fw-semibold finance-link">{{ 'auth.login.register_link' | translate }}</a>
     </p>
   </div>
 </app-account-wrapper>
