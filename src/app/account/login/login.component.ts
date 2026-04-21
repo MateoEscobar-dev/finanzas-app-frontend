@@ -146,9 +146,13 @@ export class LoginComponent implements OnInit {
     const datos = this.loginForm.getRawValue()
 
     this.autenticacionService.inicioSesion(datos).subscribe({
-      next: () => {
+      next: (response) => {
         this.isLoading = false
-        this.router.navigate(['app'])
+        if (response.data?.requires_2fa) {
+          this.router.navigate(['/2fa/verify'])
+        } else {
+          this.router.navigate(['app'])
+        }
       },
       error: () => {
         this.isLoading = false

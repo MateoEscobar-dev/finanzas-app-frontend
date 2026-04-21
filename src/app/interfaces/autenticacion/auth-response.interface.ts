@@ -20,6 +20,7 @@ export interface IAuthData {
   token_type: string
   abilities: string[]
   user: IUser
+  requires_2fa?: boolean
 }
 
 export interface IAuthResponse {
