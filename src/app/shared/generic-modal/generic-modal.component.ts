@@ -88,10 +88,31 @@ export class GenericModalComponent implements OnInit, OnDestroy, OnChanges {
         validators.push(Validators.email)
       }
 
-      groupConfig[field.name] = [null, validators]
+      // Multiselect inicia con array vacío
+      const initialValue = field.type === 'multiselect' ? [] : null
+      groupConfig[field.name] = [initialValue, validators]
     })
 
     this.form = this.fb.group(groupConfig)
+  }
+
+  /**
+   * Maneja el cambio en un campo multiselect nativo
+   */
+  onMultiselectChange(fieldName: string, event: Event): void {
+    const select = event.target as HTMLSelectElement
+    const selected = Array.from(select.selectedOptions).map((opt) => opt.value)
+    this.form.get(fieldName)?.setValue(selected)
+    this.form.get(fieldName)?.markAsTouched()
+  }
+
+  /**
+   * Verifica si un valor está seleccionado en un multiselect
+   */
+  isOptionSelected(fieldName: string, value: any): boolean {
+    const current = this.form.get(fieldName)?.value
+    if (!Array.isArray(current)) return false
+    return current.map(String).includes(String(value))
   }
 
   /**
@@ -107,9 +128,13 @@ export class GenericModalComponent implements OnInit, OnDestroy, OnChanges {
       Object.keys(this.form.controls).forEach((key) => {
         const control = this.form.get(key)
         const value = this.data[key]
+        const field = this.fields.find((f) => f.name === key)
 
         if (control) {
-          if (value !== undefined && value !== null && value !== '') {
+          if (field?.type === 'multiselect') {
+            // Para multiselect siempre asignar array
+            control.setValue(Array.isArray(value) ? value.map(String) : [])
+          } else if (value !== undefined && value !== null && value !== '') {
             control.setValue(value)
             control.markAsTouched()
           } else {
@@ -122,8 +147,9 @@ export class GenericModalComponent implements OnInit, OnDestroy, OnChanges {
       // Si no hay datos, limpiar el formulario
       Object.keys(this.form.controls).forEach((key) => {
         const control = this.form.get(key)
+        const field = this.fields.find((f) => f.name === key)
         if (control) {
-          control.setValue(null)
+          control.setValue(field?.type === 'multiselect' ? [] : null)
           control.markAsUntouched()
         }
       })

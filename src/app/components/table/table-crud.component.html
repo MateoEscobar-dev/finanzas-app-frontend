@@ -100,7 +100,8 @@
             config.enableDelete ||
             config.enableView ||
             config.enableHistory ||
-            config.enableActivate
+            config.enableActivate ||
+            (config.rowActionButtons && config.rowActionButtons.length)
           ) {
             <th style="width: 200px; text-align: center">{{ "actions.actions" | translate }}</th>
           }
@@ -118,7 +119,8 @@
                 config.enableDelete ||
                 config.enableView ||
                 config.enableHistory ||
-                config.enableActivate
+                config.enableActivate ||
+                (config.rowActionButtons && config.rowActionButtons.length)
                   ? 1
                   : 0)
               "
@@ -147,7 +149,8 @@
                 config.enableDelete ||
                 config.enableView ||
                 config.enableHistory ||
-                config.enableActivate
+                config.enableActivate ||
+                (config.rowActionButtons && config.rowActionButtons.length)
               ) {
                 <td class="text-center">
                   <div class="btn-group btn-group-sm" role="group">
@@ -168,7 +171,7 @@
                     @if (config.enableEdit && canEdit) {
                       <button
                         type="button"
-                        class="btn btn-info"
+                        class="btn btn-dark"
                         [title]="'actions.edit' | translate"
                         (click)="onEditClick(row)"
                         [disabled]="isLoading"
@@ -227,6 +230,22 @@
                       >
                         <i class="mdi mdi-trash-can"></i>
                       </button>
+                    }
+
+                    <!-- Botones de acción personalizados por fila -->
+                    @for (btn of config.rowActionButtons; track btn.action) {
+                      @if (canShowRowActionButton(btn)) {
+                        <button
+                          type="button"
+                          class="btn btn-sm"
+                          [ngClass]="btn.class || 'btn-primary'"
+                          [title]="btn.label | translate"
+                          (click)="onRowActionButtonClick(btn, row)"
+                          [disabled]="isLoading"
+                        >
+                          <i [ngClass]="btn.icon"></i>
+                        </button>
+                      }
                     }
                   </div>
                 </td>

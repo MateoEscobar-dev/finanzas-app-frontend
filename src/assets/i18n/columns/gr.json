@@ -39,6 +39,9 @@
     "service_status": "Κατάσταση υπηρεσίας",
     "installed": "Εγκατεστημένο",
     "program": "Πρόγραμμα",
-    "change_domain": "Αλλαγή τομέα"
+    "change_domain": "Αλλαγή τομέα",
+    "permissions_count": "Δικαιώματα",
+    "module": "Μονάδα",
+    "guard_name": "Guard"
   }
 }

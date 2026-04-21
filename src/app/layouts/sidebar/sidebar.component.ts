@@ -106,6 +106,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         item.collapsed = false
       }
 
+      // Derive i18n translation key from the item key (e.g. "item-dashboard" → "dashboard")
+      if (item.key) {
+        item.label = item.key.replace(/^item-/, '')
+      }
+
       // Recursively normalize submenu items
       if (item.subMenu.length > 0) {
         this.normalizeMenu(item.subMenu)

@@ -1,0 +1,157 @@
+<app-pagetitle
+  [title]="'users' | translate"
+  [subtitle]="'configuration' | translate"
+  [pagetitle]="'system' | translate"
+></app-pagetitle>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <!-- Tabla CRUD -->
+        <app-table
+          *ngIf="tableConfig"
+          [config]="tableConfig"
+          (rowAction)="onTableAction($event)"
+          (pageChange)="onPageChange($event)"
+          (search)="onSearch($event)"
+        ></app-table>
+
+        <!-- Indicador de carga -->
+        @if (isLoading) {
+          <div class="text-center py-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">{{ 'labels.loading' | translate }}</span>
+            </div>
+          </div>
+        }
+
+        <div class="mt-3 text-muted small">
+          {{ 'actions.showing' | translate }} {{ totalRecords }} {{ 'actions.entries' | translate }}
+          | {{ 'actions.showing' | translate }} {{ 'labels.page' | translate }} {{ currentPage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal CRUD genérico -->
+<app-generic-modal
+  [isVisible]="isModalVisible"
+  [mode]="modalMode"
+  [fields]="formFields"
+  [data]="selectedItem"
+  [isSubmitting]="isModalSubmitting"
+  (close)="closeModal()"
+  (formSubmit)="submitForm($event)"
+></app-generic-modal>
+
+<!-- Modal de Historial -->
+<app-history-modal
+  [isVisible]="isHistoryModalVisible"
+  [logs]="historyLogs"
+  [itemLabel]="selectedHistoryItem?.label"
+  (close)="closeHistoryModal()"
+></app-history-modal>
+
+<!-- ========================================= -->
+<!-- Modal: Permisos Directos del Usuario      -->
+<!-- ========================================= -->
+@if (isPermissionsModalVisible) {
+  <div class="modal fade show" style="display:block" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-gradient border-0 py-2">
+          <h5 class="modal-title fw-bold fs-5 text-dark">
+            <i class="mdi mdi-shield-account me-2"></i>
+            {{ 'labels.direct_permissions' | translate }} — {{ selectedUserLabel }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="closePermissionsModal()"
+            [disabled]="permissionsSaving"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          @if (permissionsLoading) {
+            <div class="text-center py-4">
+              <div class="spinner-border text-primary" role="status"></div>
+            </div>
+          } @else {
+            <p class="text-muted small mb-3">
+              <i class="mdi mdi-information me-1"></i>
+              {{ 'labels.permissions_hint' | translate }}
+            </p>
+
+            @if (permissionsModuleKeys.length === 0) {
+              <p class="text-center text-muted">{{ 'actions.no_data' | translate }}</p>
+            }
+
+            <div class="row">
+              @for (mod of permissionsModuleKeys; track mod) {
+                <div class="col-md-4 mb-3">
+                  <div class="card border">
+                    <div class="card-header py-1 bg-light fw-semibold text-uppercase small">
+                      {{ mod }}
+                    </div>
+                    <div class="card-body py-2">
+                      @for (perm of permissionsByModule[mod]; track perm.name) {
+                        <div class="form-check mb-1">
+                          <input
+                            type="checkbox"
+                            class="form-check-input"
+                            [id]="'perm_' + perm.name"
+                            [checked]="perm.checked"
+                            (change)="togglePermission(perm.name, $any($event.target).checked)"
+                          />
+                          <label
+                            class="form-check-label small"
+                            [for]="'perm_' + perm.name"
+                            [class.text-muted]="isRolePermission(perm.name)"
+                          >
+                            {{ perm.name }}
+                            @if (isRolePermission(perm.name)) {
+                              <span class="badge bg-secondary ms-1" style="font-size:0.65rem">
+                                {{ 'labels.from_role' | translate }}
+                              </span>
+                            }
+                          </label>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closePermissionsModal()"
+            [disabled]="permissionsSaving"
+          >
+            <i class="mdi mdi-close me-1"></i>{{ 'actions.cancel' | translate }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="saveDirectPermissions()"
+            [disabled]="permissionsSaving || permissionsLoading"
+          >
+            @if (permissionsSaving) {
+              <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+            }
+            <i class="mdi mdi-check me-1"></i>{{ 'actions.save' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show"></div>
+}
+

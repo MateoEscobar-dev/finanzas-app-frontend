@@ -13,6 +13,15 @@
     "postal_code": "Postal Code",
     "description": "Description",
     "notes": "Notes",
-    "select": "Select an option"
+    "select": "Select an option",
+    "loading": "Loading...",
+    "page": "Page",
+    "ctrl_click": "Ctrl+Click to select multiple",
+    "direct_permissions": "Direct Permissions",
+    "from_role": "From role",
+    "role_permissions": "Role Permissions",
+    "permissions_hint": "Check the permissions to assign directly to this user (independent of their roles).",
+    "no_permissions_assigned": "No permissions assigned to this role.",
+    "role_description_placeholder": "Role description..."
   }
 }

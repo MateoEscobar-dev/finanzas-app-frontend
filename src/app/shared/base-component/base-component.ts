@@ -5,7 +5,10 @@ import { TranslateService } from '@ngx-translate/core'
 import { PermissionService } from '@/app/core/service/permission.service'
 import Swal from 'sweetalert2'
 import { Column } from '@/app/components/table/table.model'
-import { ITableConfig } from '@/app/components/table/table-crud.component'
+import {
+  ITableConfig,
+  RowActionButton,
+} from '@/app/components/table/table-crud.component'
 import {
   CrudController,
   ICrudConfig,
@@ -21,6 +24,7 @@ export interface IFormField {
     | 'number'
     | 'date'
     | 'select'
+    | 'multiselect'
     | 'textarea'
     | 'checkbox'
   required?: boolean
@@ -158,6 +162,7 @@ export abstract class baseComponent implements OnInit, OnDestroy {
       activeFieldName: 'active',
       permissionModule: this.modulePermission,
       tableClass: 'table-striped dt-responsive nowrap w-100',
+      rowActionButtons: this.defineRowActionButtons(),
       onCreateClick: () => this.onCreateClick(),
       onEditClick: (row) => this.onEditClick(row),
       onDeleteClick: (row) => this.onDeleteClick(row),
@@ -166,6 +171,13 @@ export abstract class baseComponent implements OnInit, OnDestroy {
       onActivateClick: (row) => this.onActivateClick(row),
       onDeactivateClick: (row) => this.onDeactivateClick(row),
     }
+  }
+
+  /**
+   * Define botones de acción por fila adicionales (override en subclases si se necesitan)
+   */
+  protected defineRowActionButtons(): RowActionButton[] {
+    return []
   }
 
   // =========================================
@@ -490,7 +502,19 @@ export abstract class baseComponent implements OnInit, OnDestroy {
       case 'deactivate':
         this.onDeactivateClick(data)
         break
+      default:
+        // Delegar acciones desconocidas al handler customizable
+        this.onCustomAction(action, data)
+        break
     }
+  }
+
+  /**
+   * Handler para acciones personalizadas de rowActionButtons.
+   * Override en subclases para manejar acciones propias.
+   */
+  protected onCustomAction(_action: string, _data: any): void {
+    // Implementar en subclases
   }
 
   public onPageChange(page: number): void {

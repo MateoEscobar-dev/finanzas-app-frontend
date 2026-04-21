@@ -66,6 +66,8 @@ export interface ITableConfig<T> {
   theadClass?: string
   // Botones personalizados a mostrar junto a las acciones principales
   customButtons?: CustomButton<T>[]
+  // Botones de acción por fila (emiten rowAction con action=id)
+  rowActionButtons?: RowActionButton[]
 }
 
 // Definición de botón personalizado
@@ -77,6 +79,17 @@ export interface CustomButton<_T = any> {
   target?: string
   permission?: string
   class?: string
+}
+
+/**
+ * Botón de acción por fila (emite rowAction con la acción definida)
+ */
+export interface RowActionButton {
+  action: string           // ID de la acción (se emite en rowAction)
+  label: string            // Clave i18n para tooltip
+  icon: string             // Clase MDI, ej: 'mdi mdi-shield-account'
+  class?: string           // CSS class del botón, ej: 'btn-primary'
+  permission?: string      // Permiso requerido para mostrar el botón
 }
 
 @Component({
@@ -448,6 +461,17 @@ export class TableComponent<T = any> implements OnInit, OnDestroy {
     if (!btn) return false
     if (!btn.permission) return true
     return this.permissionService.hasPermission(btn.permission)
+  }
+
+  // Comprueba si un botón de acción por fila debe mostrarse según permisos
+  canShowRowActionButton(btn: RowActionButton): boolean {
+    if (!btn.permission) return true
+    return this.permissionService.hasPermission(btn.permission)
+  }
+
+  // Emite acción personalizada por fila
+  onRowActionButtonClick(btn: RowActionButton, row: T): void {
+    this.rowAction.emit({ action: btn.action, data: row })
   }
 
   getColumnValue(row: T, accessor: string): any {

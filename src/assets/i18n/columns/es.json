@@ -39,6 +39,9 @@
     "service_status": "Estado del Servicio",
     "installed": "Instalado",
     "program": "Programa",
-    "change_domain": "Cambiar Dominio"
+    "change_domain": "Cambiar Dominio",
+    "permissions_count": "Permisos",
+    "module": "Módulo",
+    "guard_name": "Guard"
   }
 }

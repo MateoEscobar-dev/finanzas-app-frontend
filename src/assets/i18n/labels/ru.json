@@ -13,6 +13,15 @@
     "postal_code": "Почтовый индекс",
     "description": "Описание",
     "notes": "Примечания",
-    "select": "Выберите вариант"
+    "select": "Выберите вариант",
+    "loading": "Загрузка...",
+    "page": "Страница",
+    "ctrl_click": "Ctrl+Click для множественного выбора",
+    "direct_permissions": "Прямые Права",
+    "from_role": "Из роли",
+    "role_permissions": "Права Роли",
+    "permissions_hint": "Укажите права для прямого назначения этому пользователю.",
+    "no_permissions_assigned": "Для этой роли не назначено прав.",
+    "role_description_placeholder": "Описание роли..."
   }
 }
