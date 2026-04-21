@@ -1,0 +1,108 @@
+<app-pagetitle
+  [title]="'roles' | translate"
+  [subtitle]="'configuration' | translate"
+  [pagetitle]="'system' | translate"
+></app-pagetitle>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <app-table
+          *ngIf="tableConfig"
+          [config]="tableConfig"
+          (rowAction)="onTableAction($event)"
+          (pageChange)="onPageChange($event)"
+          (search)="onSearch($event)"
+        ></app-table>
+
+        @if (isLoading) {
+          <div class="text-center py-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">{{ 'labels.loading' | translate }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal CRUD genérico -->
+<app-generic-modal
+  [isVisible]="isModalVisible"
+  [mode]="modalMode"
+  [fields]="formFields"
+  [data]="selectedItem"
+  [isSubmitting]="isModalSubmitting"
+  (close)="closeModal()"
+  (formSubmit)="submitForm($event)"
+></app-generic-modal>
+
+<!-- Modal de Historial -->
+<app-history-modal
+  [isVisible]="isHistoryModalVisible"
+  [logs]="historyLogs"
+  [itemLabel]="selectedHistoryItem?.label"
+  (close)="closeHistoryModal()"
+></app-history-modal>
+
+<!-- ========================================= -->
+<!-- Panel: Permisos del Rol (modo lectura)    -->
+<!-- ========================================= -->
+@if (isRolePermissionsVisible) {
+  <div class="modal fade show" style="display:block" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-gradient border-0 py-2">
+          <h5 class="modal-title fw-bold fs-5 text-dark">
+            <i class="mdi mdi-shield-key me-2"></i>
+            {{ 'labels.role_permissions' | translate }} — {{ selectedRoleName }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="closeRolePermissionsPanel()"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          @if (rolePermissionsModuleKeys.length === 0) {
+            <p class="text-center text-muted">{{ 'labels.no_permissions_assigned' | translate }}</p>
+          }
+
+          <div class="row">
+            @for (mod of rolePermissionsModuleKeys; track mod) {
+              <div class="col-md-4 mb-3">
+                <div class="card border">
+                  <div class="card-header py-1 bg-light fw-semibold text-uppercase small">
+                    {{ mod }}
+                  </div>
+                  <div class="card-body py-2">
+                    @for (perm of rolePermissionsByModule[mod]; track perm) {
+                      <div class="d-flex align-items-center mb-1">
+                        <i class="mdi mdi-check-circle text-success me-2 small"></i>
+                        <span class="small">{{ perm }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeRolePermissionsPanel()"
+          >
+            <i class="mdi mdi-close me-1"></i>{{ 'actions.cancel' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show"></div>
+}

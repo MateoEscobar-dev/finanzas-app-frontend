@@ -13,6 +13,15 @@
     "postal_code": "Ταχυδρομικός κώδικας",
     "description": "Περιγραφή",
     "notes": "Σημειώσεις",
-    "select": "Επιλογή"
+    "select": "Επιλογή",
+    "loading": "Φόρτωση...",
+    "page": "Σελίδα",
+    "ctrl_click": "Ctrl+Clic για πολλαπλή επιλογή",
+    "direct_permissions": "Απευθείας Αδειοδοτήσεις",
+    "from_role": "Από ρόλο",
+    "role_permissions": "Αδειοδοτήσεις Ρόλου",
+    "permissions_hint": "Ελέγξτε τις αδειοδοτήσεις για απευθείας ανάθεση στον χρήστη.",
+    "no_permissions_assigned": "Δεν υπάρχουν εκχωρημένες αδειοδοτήσεις.",
+    "role_description_placeholder": "Περιγραφή ρόλου..."
   }
 }

@@ -167,6 +167,39 @@
                     </div>
                   }
                 }
+
+                <!-- Multiselect -->
+                @if (field.type === 'multiselect' && field.options) {
+                  <label [for]="field.name" class="form-label fw-semibold">
+                    {{ field.label | translate }}
+                    @if (field.required) {
+                      <span class="badge bg-danger ms-1">*</span>
+                    }
+                    <small class="text-muted ms-2">({{ 'labels.ctrl_click' | translate }})</small>
+                  </label>
+                  <select
+                    multiple
+                    class="form-select"
+                    [id]="field.name"
+                    [disabled]="mode === 'view'"
+                    [class.is-invalid]="isFieldInvalid(field.name)"
+                    (change)="onMultiselectChange(field.name, $event)"
+                    [size]="field.options.length > 6 ? 6 : field.options.length"
+                  >
+                    @for (opt of field.options; track opt.value) {
+                      <option
+                        [value]="opt.value"
+                        [selected]="isOptionSelected(field.name, opt.value)"
+                      >{{ opt.label }}</option>
+                    }
+                  </select>
+                  @if (isFieldInvalid(field.name)) {
+                    <div class="invalid-feedback d-block small mt-1">
+                      <i class="mdi mdi-alert-circle me-1"></i
+                      >{{ getFieldError(field.name) }}
+                    </div>
+                  }
+                }
               </div>
             }
           }
