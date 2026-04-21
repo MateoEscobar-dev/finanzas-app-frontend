@@ -10,6 +10,7 @@ import {
 } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import { AccountWrapperComponent } from '@auth/account-wrapper.component'
+import { TranslateModule } from '@ngx-translate/core'
 import Swal from 'sweetalert2'
 
 @Component({
@@ -20,6 +21,7 @@ import Swal from 'sweetalert2'
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   templateUrl: './forgot-password.component.html',
   styles: `

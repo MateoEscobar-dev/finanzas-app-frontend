@@ -14,6 +14,7 @@ import {
 } from '@angular/forms'
 import { Router, RouterModule } from '@angular/router'
 import { AccountWrapperComponent } from '@auth/account-wrapper.component'
+import { TranslateModule } from '@ngx-translate/core'
 import Swal from 'sweetalert2'
 
 function ageValidator(minAge: number): ValidatorFn {
@@ -41,6 +42,7 @@ function ageValidator(minAge: number): ValidatorFn {
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   templateUrl: './register.component.html',
   styles: `

@@ -47,7 +47,7 @@ interface LangOption {
                       title="Cambiar idioma"
                     >
                       @for (lang of languages; track lang.code) {
-                        <option [value]="lang.code">{{ lang.flag }} {{ lang.code.toUpperCase() }}</option>
+                        <option [value]="lang.code" [selected]="lang.code === currentLang.code">{{ lang.flag }} {{ lang.code.toUpperCase() }}</option>
                       }
                     </select>
                   </div>
